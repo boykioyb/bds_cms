@@ -16,4 +16,8 @@ Route::get('/docs', function () {
 Route::get('/', function () {
     return view('home.index');
 });
-Route::get('/sliders','SliderController@index')->name('sliders');
+Route::group(['prefix' => 'sliders'], function () {
+    Route::get('/','SliderController@index')->name('sliders');
+    Route::get('/add','SliderController@add')->name('sliders.add');
+    Route::get('/addLang','SliderController@addLang')->name('add.lang');
+});

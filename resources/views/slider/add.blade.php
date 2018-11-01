@@ -56,8 +56,8 @@
                         </div>
                     </div>
                     <div class="m-portlet__body">
-                        <form class="m-form m-form--label-align-left- m-form--state-" id="m_form">
-
+                        <form class="m-form m-form--label-align-left- m-form--state-" id="m_form" method="post" enctype="multipart/form-data">
+                        {{ csrf_field() }}
                             <!--begin: Form Body -->
                             <div class="m-portlet__body">
                                 <div class="row">
@@ -87,68 +87,20 @@
                                                 </div>
 
                                             </div>
+                                            <div class="m-separator m-separator--dashed m-separator--sm"></div>
                                             <div class="form-group m-form__group row">
-                                                <div class="col-lg-6 m-form__group-sub">
-                                                    <label class="form-control-label">* Username:</label>
-                                                    <input type="text" name="account_username"
-                                                           class="form-control m-input" placeholder=""
-                                                           value="nick.stone">
-                                                    <span
-                                                        class="m-form__help">Your username to login to your dashboard</span>
-                                                </div>
-                                                <div class="col-lg-6 m-form__group-sub">
-                                                    <label class="form-control-label">* Password:</label>
-                                                    <input type="password" name="account_password"
-                                                           class="form-control m-input" placeholder="" value="qwerty">
-                                                    <span class="m-form__help">Please use letters and at least one number and symbol</span>
+                                                <div class="col-lg-12">
+                                                    <label class="form-control-label">* CODE_SLIDER:</label>
+                                                    <select name="code" id="code" class="form-control">
+                                                        @foreach(CODE_SLIDER as $key => $val)
+                                                            <option value="{{ $key }}">{{ $val }}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                             </div>
+
                                         </div>
                                         <div class="m-separator m-separator--dashed m-separator--lg"></div>
-                                        <div class="m-form__section">
-                                            <div class="m-form__heading">
-                                                <h3 class="m-form__heading-title">Client Settings</h3>
-                                            </div>
-                                            <div class="form-group m-form__group row">
-                                                <div class="col-lg-6 m-form__group-sub">
-                                                    <label class="form-control-label">* User Group:</label>
-                                                    <div class="m-radio-inline">
-                                                        <label class="m-radio m-radio--solid m-radio--brand">
-                                                            <input type="radio" name="account_group" checked=""
-                                                                   value="2"> Sales Person
-                                                            <span></span>
-                                                        </label>
-                                                        <label class="m-radio m-radio--solid m-radio--brand">
-                                                            <input type="radio" name="account_group" value="2"> Customer
-                                                            <span></span>
-                                                        </label>
-                                                    </div>
-                                                    <span class="m-form__help">Please select user group</span>
-                                                </div>
-                                                <div class="col-lg-6 m-form__group-sub">
-                                                    <label class="form-control-label">* Communications:</label>
-                                                    <div class="m-checkbox-inline">
-                                                        <label class="m-checkbox m-checkbox--solid m-checkbox--brand">
-                                                            <input type="checkbox" name="account_communication[]"
-                                                                   checked="" value="email"> Email
-                                                            <span></span>
-                                                        </label>
-                                                        <label class="m-checkbox m-checkbox--solid  m-checkbox--brand">
-                                                            <input type="checkbox" name="account_communication[]"
-                                                                   value="sms"> SMS
-                                                            <span></span>
-                                                        </label>
-                                                        <label class="m-checkbox m-checkbox--solid  m-checkbox--brand">
-                                                            <input type="checkbox" name="account_communication[]"
-                                                                   value="phone"> Phone
-                                                            <span></span>
-                                                        </label>
-                                                    </div>
-                                                    <span
-                                                        class="m-form__help">Please select user communication options</span>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

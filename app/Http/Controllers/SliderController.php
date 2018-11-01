@@ -15,7 +15,6 @@ class SliderController extends Controller
                 'label' => 'Danh sách Slider',
             ),
         ];
-        $req = $this->makeRequest("users/getAll", [], "GET");
         return view('slider.index', compact('breadcrumb'));
     }
 
@@ -47,6 +46,7 @@ class SliderController extends Controller
         if (empty($lang)){
             $lang = config('app.locale');
         }
-        return view('slider.lang',compact('lang'));
+
+        return view('slider.lang',compact('lang','STATUS'));
     }
 }

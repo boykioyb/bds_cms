@@ -440,7 +440,7 @@
                                     <span class="m-dropdown__arrow m-dropdown__arrow--center"></span>
                                     <div class="m-dropdown__inner">
                                         <div class="m-dropdown__header m--align-center"
-                                             style="background: url(assets/app/media/img/misc/notification_bg.jpg); background-size: cover;">
+                                             style="background: url({{ asset('assets/app/media/img/misc/notification_bg.jpg') }}); background-size: cover;">
                                             <span class="m-dropdown__header-title">9 New</span>
                                             <span class="m-dropdown__header-subtitle">User Notifications</span>
                                         </div>

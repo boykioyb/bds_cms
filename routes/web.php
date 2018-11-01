@@ -16,6 +16,7 @@ Route::get('/docs', function () {
 Route::get('/', function () {
     return view('home.index');
 });
+Route::post('uploadFile','MediaController@uploadFile')->name('uploadFile');
 Route::group(['prefix' => 'sliders'], function () {
     Route::get('/','SliderController@index')->name('sliders');
     Route::get('/add','SliderController@add')->name('sliders.add');

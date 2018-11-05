@@ -2,16 +2,15 @@
 
 namespace App\Models;
 
+use App\BaseModel;
+
 class Slider extends BaseModel
 {
     public $collection = 'sliders';
-    public $fillable = [
-        'status',
-    ];
+    protected $guarded = [];
 
 
     public $customSchema = array(
-        'id' => null,
         'code' => '',
         'data_locale' => [
             'name' => '',
@@ -20,15 +19,12 @@ class Slider extends BaseModel
             'description' => '',
             'weight' => 0,
             'status' => 0,
+            'files' => null,
         ],
-        'files' => null,
-        'file_uris' => null,
-        'owner' => '',
-        'created' => null,
-        'modified' => null,
+        'owner' => null,
     );
     public $asciiFields = array(
-        'data_locale.name',
+        'name',
     );
 
 }

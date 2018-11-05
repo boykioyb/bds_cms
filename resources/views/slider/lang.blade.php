@@ -24,15 +24,15 @@
             <div class="m-accordion__item-content">
                 <div class="form-group m-form__group row">
                     <label class="form-control-label">* Tên:</label>
-                    <input type="text" name="[{{ $lang }}][name]"
+                    <input type="text" name="data[{{ $lang }}][name]"
                            class="form-control m-input" placeholder=" Nhập tên"
-                           value="">
+                           value="{{ isset($request_data) && !empty($request_data['name']) ? $request_data['name'] : '' }}">
                 </div>
                 <div class="form-group m-form__group row">
                     <label class="form-control-label">* Url:</label>
-                    <input type="text" name="[{{ $lang }}][url_alias]"
+                    <input type="text" name="data[{{ $lang }}][url_alias]"
                            class="form-control m-input" placeholder=" Nhập url"
-                           value="">
+                           value="{{ isset($request_data) && !empty($request_data['url_alias']) ? $request_data['url_alias'] : '' }}">
                     <span
                         class="m-form__help">Tự động tạo ra url hoặc bạn có thể thay đổi nó.</span>
 
@@ -40,36 +40,29 @@
                 <div class="form-group m-form__group row">
                     <label class="form-control-label">Mô tả:</label>
 
-                    <textarea class="form-control" name="[{{ $lang }}][description]"></textarea>
+                    <textarea class="form-control"
+                              name="data[{{ $lang }}][description]">{{ isset($request_data) && !empty($request_data['description']) ? $request_data['description'] : '' }}</textarea>
                 </div>
                 <div class="form-group m-form__group row">
                     <div class="col-lg-6 m-form__group-sub">
                         <label class="form-control-label">Trạng thái:</label>
-                        <select name="[{{ $lang }}][status]" id="status" class="form-control">
+                        <select name="data[{{ $lang }}][status]" id="status" class="form-control">
                             @foreach(STATUS as $key => $val)
-                                <option value="{{ $key }}">{{$val}}</option>
+                                <option
+                                    {{ isset($request_data) && !empty($request_data['status']) && $request_data['status'] == $key  ? 'selected' : '' }} value="{{ $key }}">{{$val}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="col-lg-6 m-form__group-sub">
                         <label class="form-control-label">Thứ tự:</label>
-                        <input type="number" min="0" name="[{{$lang}}][weight]"
-                               class="form-control m-input">
+                        <input type="number" min="0" name="data[{{$lang}}][weight]"
+                               class="form-control m-input"
+                               value="{{ isset($request_data) && !empty($request_data['weight']) ? $request_data['weight'] : '' }}"
+                        >
                     </div>
                 </div>
                 <div class="form-group m-form__group row">
-                    <input type="hidden" id="lang-{{ $lang }}" value="{{$lang}}">
-                    <label class="form-control-label">Thứ tự:</label>
-                    <div class="m-dropzone dropzone dz-clickable" action="{{ route('uploadFile') }}"
-                         id="m-dropzone-one-{{ $lang }}">
-                        <div class="m-dropzone__msg dz-message needsclick">
-                            <h3 class="m-dropzone__msg-title">Drop files here or click to upload.</h3>
-                            <span class="m-dropzone__msg-desc">This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.</span>
-                        </div>
-                        <div class="fallback">
-                            <input name="file" type="file" multiple/>
-                        </div>
-                    </div>
+                    @include('layouts.elements.drop_zone',['lang' => $lang, 'files' => isset($request_data) && !empty($request_data['files']) ? $request_data['files'] : ''])
                 </div>
             </div>
         </div>
@@ -83,46 +76,6 @@
 
 </script>
 {{--<script src="{{ asset('assets/demo/default/custom/crud/forms/widgets/dropzone.js') }}"></script>--}}
-<script>
 
-    mydropzone = new Dropzone('#m-dropzone-one-{{ $lang }}', {
-        paramName: "file",
-        maxFiles: 5,
-        headers: {
-            'X-CSRF-TOKEN': '{!! csrf_token() !!}'
-        },
-        maxFilesize: 5,
-        acceptedFiles: 'image/*',
-        addRemoveLinks: !0,
-        dictFileTooBig: 'Image is bigger than 5MB',
-        removedfile: function(file) {
-            var name = file.name;
-            name =name.replace(/\s+/g, '-').toLowerCase();    /*only spaces*/
-            $.ajax({
-                type: 'POST',
-                url: '{{ url('admincp/deleteImg') }}',
-                headers: {
-                    'X-CSRF-TOKEN': '{!! csrf_token() !!}'
-                },
-                data: "id="+name,
-                dataType: 'html',
-                success: function(data) {
-                    $("#msg").html(data);
-                }
-            });
-            var _ref;
-            if (file.previewElement) {
-                if ((_ref = file.previewElement) != null) {
-                    _ref.parentNode.removeChild(file.previewElement);
-                }
-            }
-            return this._updateMaxFilesReachedClass();
-        },
-        sending:function(file, xhr, formData){
-            formData.append('lang_code',$("#lang-{{ $lang }}").val() );
-
-        },
-    });
-</script>
 {{--<script src="{{ asset('assets/demo/default/custom/crud/forms/widgets/summernote.js') }}"></script>--}}
 

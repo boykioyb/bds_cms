@@ -77,7 +77,7 @@
                             </li>
                             @if (!empty($breadcrumb))
 
-                            @foreach($breadcrumb as $item)
+                                @foreach($breadcrumb as $item)
 
                                     <li class="m-nav__separator">-</li>
                                     <li class="m-nav__item">
@@ -146,7 +146,17 @@
 
 <!--begin::Page Scripts -->
 <script src="{{ asset('assets/app/js/dashboard.js') }}" type="text/javascript"></script>
+<script>
+    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+
+    @if(\Illuminate\Support\Facades\Session::has($msg))
+    toastr.{{ $msg  }}('{{ \Illuminate\Support\Facades\Session::get($msg) }}');
+    @endif
+    @endforeach
+</script>
+
 @yield('script')
+@yield('js')
 <!--end::Page Scripts -->
 </body>
 

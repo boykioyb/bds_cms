@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-class Country extends BaseModel
+use App\BaseModel;
+
+class District extends BaseModel
 {
     public $collection = 'district';
     public $fillable = [

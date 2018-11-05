@@ -2,7 +2,7 @@
     $(document).ready(function () {
         $('#addLang').on('click', function () {
             var lang = $('#selectLang').val();
-            $.get('{{ route('add.lang') }}', {lang_code: lang}, function (data) {
+            $.get('{{ request()->route()->getPrefix() }}/addLang', {lang_code: lang}, function (data) {
                 if (checkLangCode(lang)) {
                     toastr.error('Ngôn ngữ đã có!');
                 } else {

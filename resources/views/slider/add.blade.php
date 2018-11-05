@@ -1,6 +1,7 @@
 @extends('layouts.base')
 @section('title',$page_title)
 @section('sub_header',$page_title)
+@include('layouts.elements.jquery_file_upload_assets')
 @section('content')
     <div class="m-content">
         <div class="row">
@@ -9,88 +10,29 @@
                 <!--begin::Portlet-->
                 <div class="m-portlet m-portlet--last m-portlet--head-lg m-portlet--responsive-mobile"
                      id="main_portlet">
-                    <div class="m-portlet__head" style="">
-                        <div class="m-portlet__head-progress">
-
-                            <!-- here can place a progress bar-->
-                        </div>
-                        <div class="m-portlet__head-wrapper">
-                            <div class="m-portlet__head-caption">
-                                <div class="m-portlet__head-title">
-                                    <h3 class="m-portlet__head-text">
-                                        {{ $page_title }}
-                                    </h3>
-                                </div>
-                            </div>
-                            <div class="m-portlet__head-tools">
-                                <a href="#"
-                                   class="btn btn-secondary m-btn m-btn--icon m-btn--wide m-btn--md m--margin-right-10">
-													<span>
-														<i class="la la-arrow-left"></i>
-														<span>Back</span>
-													</span>
-                                </a>
-                                <div class="btn-group">
-                                    <button type="button"
-                                            class="btn btn-accent  m-btn m-btn--icon m-btn--wide m-btn--md">
-														<span>
-															<i class="la la-check"></i>
-															<span>Save</span>
-														</span>
-                                    </button>
-                                    <button type="button"
-                                            class="btn btn-accent  dropdown-toggle dropdown-toggle-split m-btn m-btn--md"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#"><i class="la la-plus"></i> Save &amp; New</a>
-                                        <a class="dropdown-item" href="#"><i class="la la-copy"></i> Save &amp;
-                                            Duplicate</a>
-                                        <a class="dropdown-item" href="#"><i class="la la-undo"></i> Save &amp;
-                                            Close</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#"><i class="la la-close"></i> Cancel</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="m-portlet__body">
-                        <form class="m-form m-form--label-align-left- m-form--state-" id="m_form" method="post" enctype="multipart/form-data">
+                        <form class="m-form m-form--label-align-left- m-form--state-" id="m_form" method="post"
+                              enctype="multipart/form-data">
                         {{ csrf_field() }}
-                            <!--begin: Form Body -->
+                        <!--begin: Form Body -->
                             <div class="m-portlet__body">
                                 <div class="row">
                                     <div class="col-xl-8 offset-xl-2">
-
-
                                         <div class="m-form__section m-form__section--first">
                                             <div class="form-group m-form__group row">
                                                 <div class="col-lg-12">
-                                                    <label class="form-control-label">* Language:</label>
-
-                                                    <div class="input-group m-input-group m-input-group--air">
-
-                                                        <select id="selectLang" class="form-control">
-                                                            @foreach(LANGUAGE as $k => $val)
-                                                                <option value="{{ $k }}">{{$val}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                        <div class="input-group-prepend">
-                                                            <button class="btn btn-success" id="addLang" type="button">
-                                                                +
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="wrap-lang" style="margin-top: 20px">
-                                                    </div>
+                                                    <label class="form-control-label">Ngôn ngữ:</label>
+                                                    <select name="lang_code" class="form-control m-input">
+                                                        @foreach(LANGUAGE as $k => $val)
+                                                            <option value="{{ $k }}">{{$val}}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
-
                                             </div>
-                                            <div class="m-separator m-separator--dashed m-separator--sm"></div>
                                             <div class="form-group m-form__group row">
                                                 <div class="col-lg-12">
-                                                    <label class="form-control-label">* CODE_SLIDER:</label>
+                                                    <label class="form-control-label"><i class="text-danger">* </i>
+                                                        CODE_SLIDER:</label>
                                                     <select name="code" id="code" class="form-control">
                                                         @foreach(CODE_SLIDER as $key => $val)
                                                             <option value="{{ $key }}">{{ $val }}</option>
@@ -98,10 +40,64 @@
                                                     </select>
                                                 </div>
                                             </div>
-
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-lg-12">
+                                                    <label class="form-control-label"><i
+                                                            class="text-danger">* </i>Tên:</label>
+                                                    <input type="text" name="name" class="form-control m-input"
+                                                           placeholder=" Nhập tên">
+                                                </div>
+                                            </div>
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-lg-12">
+                                                    <label class="form-control-label"><i
+                                                            class="text-danger">* </i>Url:</label>
+                                                    <input type="text" name="url_alias"
+                                                           class="form-control m-input" placeholder=" Nhập url"
+                                                    >
+                                                    <span
+                                                        class="m-form__help">Tự động tạo ra url hoặc bạn có thể thay đổi nó.</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-lg-12">
+                                                    <label class="form-control-label">Mô tả:</label>
+                                                    <textarea class="form-control" name="description"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-lg-6 m-form__group-sub">
+                                                    <label class="form-control-label">Trạng thái:</label>
+                                                    <select name="status" id="status" class="form-control">
+                                                        @foreach(STATUS as $key => $val)
+                                                            <option value="{{ $key }}">{{$val}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-6 m-form__group-sub">
+                                                    <label class="form-control-label">Thứ tự:</label>
+                                                    <input type="number" min="0" name="weight"
+                                                           class="form-control m-input"
+                                                           value="{{ isset($request_data) && !empty($request_data['weight']) ? $request_data['weight'] : '' }}"
+                                                    >
+                                                </div>
+                                            </div>
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-lg-12">
+                                                    @include('layouts.elements.jquery_file_upload',[
+                                                        'id' => 'image'
+                                                    ])
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="m-separator m-separator--dashed m-separator--lg"></div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="m-portlet__foot m-portlet__foot--fit">
+                                <div class="m-form__actions m-form__actions">
+                                    <button type="submit" class="btn btn-primary">Đăng</button>
+                                    <button type="reset" class="btn btn-secondary">Hủy bỏ</button>
                                 </div>
                             </div>
                         </form>
@@ -114,5 +110,5 @@
     </div>
 @endsection
 @section('script')
-    @include('layouts.elements.newLang')
+    <script src="{{ asset('js/upload.js') }}"></script>
 @endsection

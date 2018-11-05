@@ -10,8 +10,9 @@ class Media extends BaseModel
     protected $guarded = [];
 
     public $customSchema = array(
-        'date' => null,
-        'lang' => '',
+        'name' => '',
+        'size' => 0,
+        'mime' => '',
         'file_url' => '',
         'owner' => '',
     );

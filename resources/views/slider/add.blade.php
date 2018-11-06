@@ -1,7 +1,7 @@
 @extends('layouts.base')
 @section('title',$page_title)
 @section('sub_header',$page_title)
-@include('layouts.elements.jquery_file_upload_assets')
+@include('elements.file_manager_asset')
 @section('content')
     <div class="m-content">
         <div class="row">
@@ -84,9 +84,16 @@
                                             </div>
                                             <div class="form-group m-form__group row">
                                                 <div class="col-lg-12">
-                                                    @include('layouts.elements.jquery_file_upload',[
-                                                        'id' => 'image'
-                                                    ])
+                                                    <label class="form-control-label">Chọn ảnh:</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <a href="{{asset('responsive_filemanager/filemanager/dialog.php?type=1&field_id=fieldID&relative_url=1&multiple=1')}}"
+                                                               class="input-group-text iframe-btn" type="button">Chọn
+                                                                files</a></div>
+                                                        <input id="fieldID" type="text"
+                                                               class="form-control form-inline m-input" value=""
+                                                               disabled>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -108,7 +115,4 @@
             </div>
         </div>
     </div>
-@endsection
-@section('script')
-    <script src="{{ asset('js/upload.js') }}"></script>
 @endsection

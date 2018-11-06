@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "55c04315dee3c21cbc959fdb1a62db14",
+    "content-hash": "eb787762167619a136cff0490b151dbe",
     "packages": [
         {
             "name": "barryvdh/laravel-ide-helper",
@@ -128,65 +128,6 @@
                 }
             ],
             "time": "2016-06-13T19:28:20+00:00"
-        },
-        {
-            "name": "bkwld/croppa",
-            "version": "4.7.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/BKWLD/croppa.git",
-                "reference": "2ca553795085f21b77829053a9da0d1221d6cd77"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/BKWLD/croppa/zipball/2ca553795085f21b77829053a9da0d1221d6cd77",
-                "reference": "2ca553795085f21b77829053a9da0d1221d6cd77",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/console": "4 - 5",
-                "illuminate/routing": "4 - 5",
-                "illuminate/support": "4 - 5",
-                "league/flysystem": "~1.0",
-                "php": ">=5.5.0",
-                "symfony/http-foundation": "2 - 4",
-                "symfony/http-kernel": "2 - 4",
-                "weotch/phpthumb": "^1.0.5"
-            },
-            "conflict": {
-                "league/flysystem-cached-adapter": "<1.0.2"
-            },
-            "require-dev": {
-                "mockery/mockery": "~0.9",
-                "phpunit/phpunit": "4 - 5"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Bkwld\\Croppa\\ServiceProvider"
-                    ],
-                    "aliases": {
-                        "Croppa": "Bkwld\\Croppa\\Facade"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Bkwld\\Croppa": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Robert Reinhard"
-                }
-            ],
-            "description": "Image thumbnail creation through specially formatted URLs for Laravel",
-            "time": "2018-02-23T00:34:50+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -850,39 +791,6 @@
                 "trusted proxy"
             ],
             "time": "2018-02-07T20:20:57+00:00"
-        },
-        {
-            "name": "gargron/fileupload",
-            "version": "v1.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Gargron/fileupload.git",
-                "reference": "c3dff535efe931d08eaf3362950823aab9e8fba3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Gargron/fileupload/zipball/c3dff535efe931d08eaf3362950823aab9e8fba3",
-                "reference": "c3dff535efe931d08eaf3362950823aab9e8fba3",
-                "shasum": ""
-            },
-            "require": {
-                "php": "~7.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^6.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "FileUpload\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "File uploading library capable of handling large/chunked/multiple file uploads",
-            "time": "2018-10-15T12:05:14+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -2556,16 +2464,16 @@
         },
         {
             "name": "symfony/debug",
-            "version": "v4.1.6",
+            "version": "v4.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "e3f76ce6198f81994e019bb2b4e533e9de1b9b90"
+                "reference": "19090917b848a799cbae4800abf740fe4eb71c1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/e3f76ce6198f81994e019bb2b4e533e9de1b9b90",
-                "reference": "e3f76ce6198f81994e019bb2b4e533e9de1b9b90",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/19090917b848a799cbae4800abf740fe4eb71c1d",
+                "reference": "19090917b848a799cbae4800abf740fe4eb71c1d",
                 "shasum": ""
             },
             "require": {
@@ -2608,20 +2516,20 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2018-10-02T16:36:10+00:00"
+            "time": "2018-10-31T09:09:42+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v4.1.6",
+            "version": "v4.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "bfb30c2ad377615a463ebbc875eba64a99f6aa3e"
+                "reference": "552541dad078c85d9414b09c041ede488b456cd5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/bfb30c2ad377615a463ebbc875eba64a99f6aa3e",
-                "reference": "bfb30c2ad377615a463ebbc875eba64a99f6aa3e",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/552541dad078c85d9414b09c041ede488b456cd5",
+                "reference": "552541dad078c85d9414b09c041ede488b456cd5",
                 "shasum": ""
             },
             "require": {
@@ -2671,7 +2579,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2018-07-26T09:10:45+00:00"
+            "time": "2018-10-10T13:52:42+00:00"
         },
         {
             "name": "symfony/filesystem",
@@ -2774,16 +2682,16 @@
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v4.1.6",
+            "version": "v4.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "d528136617ff24f530e70df9605acc1b788b08d4"
+                "reference": "82d494c1492b0dd24bbc5c2d963fb02eb44491af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/d528136617ff24f530e70df9605acc1b788b08d4",
-                "reference": "d528136617ff24f530e70df9605acc1b788b08d4",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/82d494c1492b0dd24bbc5c2d963fb02eb44491af",
+                "reference": "82d494c1492b0dd24bbc5c2d963fb02eb44491af",
                 "shasum": ""
             },
             "require": {
@@ -2824,20 +2732,20 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2018-10-03T08:48:45+00:00"
+            "time": "2018-10-31T09:09:42+00:00"
         },
         {
             "name": "symfony/http-kernel",
-            "version": "v4.1.6",
+            "version": "v4.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-kernel.git",
-                "reference": "f5e7c15a5d010be0e16ce798594c5960451d4220"
+                "reference": "958be64ab13b65172ad646ef5ae20364c2305fae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/f5e7c15a5d010be0e16ce798594c5960451d4220",
-                "reference": "f5e7c15a5d010be0e16ce798594c5960451d4220",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/958be64ab13b65172ad646ef5ae20364c2305fae",
+                "reference": "958be64ab13b65172ad646ef5ae20364c2305fae",
                 "shasum": ""
             },
             "require": {
@@ -2911,11 +2819,11 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "https://symfony.com",
-            "time": "2018-10-03T12:53:38+00:00"
+            "time": "2018-11-03T11:11:23+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.9.0",
+            "version": "v1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
@@ -2973,16 +2881,16 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.9.0",
+            "version": "v1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "d0cd638f4634c16d8df4508e847f14e9e43168b8"
+                "reference": "c79c051f5b3a46be09205c73b80b346e4153e494"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/d0cd638f4634c16d8df4508e847f14e9e43168b8",
-                "reference": "d0cd638f4634c16d8df4508e847f14e9e43168b8",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/c79c051f5b3a46be09205c73b80b346e4153e494",
+                "reference": "c79c051f5b3a46be09205c73b80b346e4153e494",
                 "shasum": ""
             },
             "require": {
@@ -3028,7 +2936,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2018-08-06T14:22:27+00:00"
+            "time": "2018-09-21T13:07:52+00:00"
         },
         {
             "name": "symfony/polyfill-php72",
@@ -3451,41 +3359,6 @@
                 "environment"
             ],
             "time": "2018-07-29T20:33:41+00:00"
-        },
-        {
-            "name": "weotch/phpthumb",
-            "version": "1.0.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/weotch/PHPThumb.git",
-                "reference": "f5c1d2ef2e9de3bded7483778618bf8cac2511c3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/weotch/PHPThumb/zipball/f5c1d2ef2e9de3bded7483778618bf8cac2511c3",
-                "reference": "f5c1d2ef2e9de3bded7483778618bf8cac2511c3",
-                "shasum": ""
-            },
-            "replace": {
-                "dannytrue/phpthumb": "dev-master#2d8898f62e75a743e248dd5906a038d574e0dfe0"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "src/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Robert Reinhard"
-                }
-            ],
-            "description": "Fork of PHPThumb that adds auto-image rotation based on EXIF data and composer support",
-            "time": "2015-05-12T22:56:19+00:00"
         }
     ],
     "packages-dev": [

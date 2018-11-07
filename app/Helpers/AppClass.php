@@ -2,21 +2,13 @@
 
 
 namespace App\Helpers;
-use Illuminate\Support\Facades\Facade;
-
 class AppClass
 {
 
-    public function checkLangExist($data = array())
+    public function checkLangExist($repository,$lang = null,$name_ascii = "")
     {
-        $isExist = false;
-        foreach (LANGUAGE as $k => $val) {
-            if (array_key_exists($k, $data)) {
-                $isExist = true;
-                break;
-            }
-        }
-        return $isExist;
+        $find = $repository->where('lang',$lang)->where('name_ascii',$name_ascii);
+        dump($find);die;
     }
 
     public function pageTitleAndBreadCrumb($title,$urlHome,$checkShow = 0){

@@ -13,7 +13,9 @@
         "guzzlehttp/guzzle": "^6.3",
         "jenssegers/mongodb": "^3.4",
         "laravel/framework": "5.7.*",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "suren/laravel-mongo-model-schema": "dev-master",
+        "nesbot/carbon": "1.26.3"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",

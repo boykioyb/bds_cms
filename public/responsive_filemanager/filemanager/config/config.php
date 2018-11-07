@@ -21,7 +21,7 @@ mb_language('uni');
 mb_regex_encoding('UTF-8');
 ob_start('mb_output_handler');
 date_default_timezone_set('Asia/Ho_Chi_Minh');
-setlocale(LC_CTYPE, 'en_US'); //correct transliteration
+setlocale(LC_CTYPE, 'vi'); //correct transliteration
 
 /*
 |--------------------------------------------------------------------------
@@ -226,7 +226,7 @@ $config = array(
 	| default language file name
 	|--------------------------------------------------------------------------
 	*/
-	'default_language' => "en_EN",
+	'default_language' => "vi",
 
 	/*
 	|--------------------------------------------------------------------------

@@ -16,14 +16,11 @@ Route::get('/docs', function () {
 Route::get('/', function () {
     return view('home.index');
 });
-Route::resource('medias', 'MediaController', ['only' => ['index', 'store', 'destroy']]);
 
 Route::group(['prefix' => 'sliders'], function () {
     Route::get('/','SliderController@index')->name('sliders');
     Route::get('/add','SliderController@add')->name('sliders.add');
     Route::post('/add','SliderController@add')->name('sliders.add.post');
-    Route::get('/addLang','SliderController@addLang')->name('add.lang');
-
     Route::get('edit/{id}','SliderController@edit')->name('sliders.edit');
 });
 Route::get('abc/add','SliderController@add')->name('abc.add');

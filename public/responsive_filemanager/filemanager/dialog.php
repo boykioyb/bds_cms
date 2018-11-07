@@ -55,7 +55,6 @@ if ( checkRelativePath($subdir_path))
 	$_SESSION['RF']["filter"]='';
 }
 else { $subdir = ''; }
-
 if($subdir == "")
 {
 	if(!empty($_COOKIE['last_position']) && strpos($_COOKIE['last_position'],'.') === FALSE){

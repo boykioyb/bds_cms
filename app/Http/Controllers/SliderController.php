@@ -31,12 +31,8 @@ class SliderController extends Controller
     {
         if ($request->isMethod("POST")) {
             $req = $request->request->all();
-            dump($req);die;
-            if (!\AppClass::checkLangExist($req['data'])) {
-                $request->session()->flash('error', 'Hãy chọn ngôn ngữ');
-                return redirect()->route('sliders.add');
-            }
-            $this->sliderRepository->create($req['data']);
+            $req['files'] = json_decode($req['files']);
+            $this->sliderRepository->create($req);
             $request->session()->flash('success', 'Tạo mới slider thành công');
             return redirect()->route('sliders');
         }
@@ -58,17 +54,6 @@ class SliderController extends Controller
             'breadcrumb',
             'page_title'
         ));
-    }
-
-    public function addLang(Request $request)
-    {
-        $lang = $request->request->get('lang_code');
-        if (empty($lang)) {
-            $lang = config('app.locale');
-        }
-
-
-        return view( 'slider.lang', compact('lang', 'STATUS'));
     }
 
     public function edit($id,Request $request)

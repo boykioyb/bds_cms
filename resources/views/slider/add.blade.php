@@ -82,18 +82,20 @@
                                                     >
                                                 </div>
                                             </div>
+
+
                                             <div class="form-group m-form__group row">
                                                 <div class="col-lg-12">
-                                                    <label class="form-control-label">Chọn ảnh:</label>
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <a href="{{asset('responsive_filemanager/filemanager/dialog.php?type=1&field_id=fieldID&relative_url=1&multiple=1')}}"
-                                                               class="input-group-text iframe-btn" type="button">Chọn
-                                                                files</a></div>
-                                                        <input id="fieldID" type="text"
-                                                               class="form-control form-inline m-input" value=""
-                                                               disabled>
-                                                    </div>
+                                                    @include('elements.file_manager',[
+                                                        'id' => 'image-id',
+                                                        'name' => 'files',
+                                                        'label' => 'Chọn ảnh',
+                                                        'option' => array(
+                                                            'type' => 1,
+                                                            'relative_url' => 1,
+                                                            'multiple' => 1
+                                                        )
+                                                    ])
                                                 </div>
                                             </div>
                                         </div>

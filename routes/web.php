@@ -22,5 +22,6 @@ Route::group(['prefix' => 'sliders'], function () {
     Route::get('/add','SliderController@add')->name('sliders.add');
     Route::post('/add','SliderController@add')->name('sliders.add.post');
     Route::get('edit/{id}','SliderController@edit')->name('sliders.edit');
+    Route::get('dataTables','SliderController@dataTable')->name('sliders.dataTable');
 });
 Route::get('abc/add','SliderController@add')->name('abc.add');

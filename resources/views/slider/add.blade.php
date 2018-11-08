@@ -32,7 +32,7 @@
                                             <div class="form-group m-form__group row">
                                                 <div class="col-lg-12">
                                                     <label class="form-control-label"><i class="text-danger">* </i>
-                                                        CODE_SLIDER:</label>
+                                                        Vị trí:</label>
                                                     <select name="code" id="code" class="form-control">
                                                         @foreach(CODE_SLIDER as $key => $val)
                                                             <option value="{{ $key }}">{{ $val }}</option>
@@ -44,7 +44,8 @@
                                                 <div class="col-lg-12">
                                                     <label class="form-control-label"><i
                                                             class="text-danger">* </i>Tên:</label>
-                                                    <input type="text" name="name" class="form-control m-input"
+                                                    <input id="name_slug" type="text" name="name"
+                                                           class="form-control m-input"
                                                            placeholder=" Nhập tên">
                                                 </div>
                                             </div>
@@ -52,7 +53,7 @@
                                                 <div class="col-lg-12">
                                                     <label class="form-control-label"><i
                                                             class="text-danger">* </i>Url:</label>
-                                                    <input type="text" name="url_alias"
+                                                    <input type="text" name="url_alias" id="url_slug"
                                                            class="form-control m-input" placeholder=" Nhập url"
                                                     >
                                                     <span
@@ -99,13 +100,12 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="m-separator m-separator--dashed m-separator--lg"></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="m-portlet__foot m-portlet__foot--fit">
                                 <div class="m-form__actions m-form__actions">
-                                    <button type="submit" class="btn btn-primary">Đăng</button>
+                                    <button type="submit" class="btn btn-primary"><i class="la la-check"></i> Đăng</button>
                                     <button type="reset" class="btn btn-secondary">Hủy bỏ</button>
                                 </div>
                             </div>

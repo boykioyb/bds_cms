@@ -5,10 +5,10 @@ define('STATUS',[
     2 => 'Xóa',
 ]);
 define('CODE_SLIDER',[
-    'BANNER_TOP' => 'BANNER_TOP',
-    'BANNER_BOTTOM' => 'BANNER_BOTTOM'
+    'BANNER_TOP' => 'Banner trên',
+    'BANNER_BOTTOM' => 'Banner dưới'
 ]);
 define("LANGUAGE",[
-    'vi' => 'Viet Nam',
-    'en' => 'Tieng Anh'
+    'vi' => 'Việt Nam',
+    'en' => 'Tiếng Anh'
 ]);

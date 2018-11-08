@@ -19,4 +19,6 @@ interface RepositoryInterface
     public function orWhere($conditions, $operator = null, $value = null);
 
     public function count();
+
+    public function paginate($option, $operator = null, $page = null, $limit = null);
 }

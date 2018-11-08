@@ -33,4 +33,18 @@ class Controller extends BaseController
         return $str;
     }
 
+    public function searchOption($data = array())
+    {
+        $options = array();
+//        dump($data);die;
+        foreach ($data as $val) {
+            if (!empty($val['data'])) {
+                if (!empty($val['search']['value'])) {
+                    $options[$val['data']] = $val['search']['value'];
+                }
+            }
+        }
+        return $options;
+    }
+
 }

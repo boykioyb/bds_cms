@@ -9,6 +9,8 @@ class SliderRepository extends BaseRepository
 {
     private $where;
     private $orWhere;
+    const PAGE_DEFAULT = 0;
+    const LIMIT_DEFAULT = 10;
 
     public function model()
     {
@@ -113,5 +115,44 @@ class SliderRepository extends BaseRepository
         }
     }
 
+    public function paginate($option, $operator = null, $page = null, $limit = null)
+    {
+        if (empty($page)) {
+            $page = self::PAGE_DEFAULT;
+        }
+        if (empty($limit)) {
+            $limit = self::LIMIT_DEFAULT;
+        }
+        $this->makeModel();
+        $result = $this->model();
 
+        if (empty($option)) {
+            return $result::limit($limit)->offset($page)->get();
+        }
+
+        $this->_dataNormalization($result::SCHEMAS(), $option);
+        $i = 0;
+        foreach ($option as $k => $value) {
+            if ($i == 0) {
+                $result = $result::where($k, $value);
+            } else {
+                $result = $result->where($k, $value);
+            }
+            $i++;
+        }
+        return $result->limit($limit)->offset($page)->get();
+    }
+
+    private function _dataNormalization($schema, &$option)
+    {
+        foreach ($schema as $k => $val) {
+            switch ($val['type']) {
+                case 'int';
+                    if (!empty($option[$k])) {
+                        $option[$k] = (int)$option[$k];
+                    }
+                    break;
+            }
+        }
+    }
 }

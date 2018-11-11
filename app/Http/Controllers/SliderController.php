@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SliderRequest;
-use App\Models\Slider;
 use App\Repositories\SliderRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -11,22 +9,23 @@ use Illuminate\Http\Response;
 
 class SliderController extends Controller
 {
-    private $sliderRepository;
+    const TITLE = 'Slider';
+    const URL_HOME = 'sliders';
+    const  VIEW = 'slider';
+    private $repository;
 
-    public function __construct(SliderRepository $sliderRepository)
+    public function __construct(SliderRepository $repository)
     {
-        $this->sliderRepository = $sliderRepository;
+        $this->repository = $repository;
     }
 
     public function index()
     {
-        $breadcrumb = [
-            array(
-                'url' => 'sliders',
-                'label' => 'Danh sách Slider',
-            ),
-        ];
-        return view('slider.index', compact('breadcrumb'));
+        $titleBreadCrumb = \AppClass::pageTitleAndBreadCrumb(self::TITLE, self::URL_HOME);
+        return view(self::VIEW . '.index', [
+            'page_title' => $titleBreadCrumb['page_title'],
+            'breadcrumb' => $titleBreadCrumb['breadcrumb']
+        ]);
     }
 
     public function add(Request $request)
@@ -35,41 +34,38 @@ class SliderController extends Controller
             $req = $request->request->all();
             $req['files'] = json_decode($req['files']);
             $req['name_ascii'] = $this->convert_vi_to_en($req['name']);
-            $req['res'] = ';da';
-            $this->sliderRepository->create($req);
-            $request->session()->flash('success', 'Tạo mới slider thành công');
-            return redirect()->route('sliders');
+            $this->repository->create($req);
+            $request->session()->flash('success', 'Tạo mới ' . self::TITLE . ' thành công');
+            return redirect()->route(self::URL_HOME);
         }
-        /**Thêm cấu hình trang**/
-        $page_title = "Thêm mới Slider";
-        $breadcrumb = [
-            array(
-                'url' => "/sliders",
-                'label' => 'Danh sách Slider',
-            ),
-            array(
-                'url' => '#',
-                'label' => 'Thêm mới Slider',
-            )
-        ];
-        /**end cấu hình trang**/
 
-        return view('slider.add', compact(
-            'breadcrumb',
-            'page_title'
-        ));
+        $titleBreadCrumb = \AppClass::pageTitleAndBreadCrumb(self::TITLE, self::URL_HOME);
+
+        return view(self::VIEW . '.add', [
+            'page_title' => $titleBreadCrumb['page_title'],
+            'breadcrumb' => $titleBreadCrumb['breadcrumb']
+        ]);
     }
 
     public function edit($id, Request $request)
     {
-        $findId = $this->sliderRepository->findById($id);
+        $findId = $this->repository->findById($id);
         if (empty($findId)) {
             $request->session()->flash('error', $id . ' không tồn tại');
-            return redirect()->route('sliders');
+            return redirect()->route(self::URL_HOME);
         }
-        $titleBreadCrumb = \AppClass::pageTitleAndBreadCrumb('Slider', 'sliders', 1);
+        $titleBreadCrumb = \AppClass::pageTitleAndBreadCrumb(self::TITLE, self::URL_HOME, 2);
 //        $decode = json_decode($findId);
-        return view('slider.add', [
+
+        if ($request->isMethod('POST')) {
+            $req = $request->request->all();
+            $req['files'] = json_decode($req['files']);
+            $req['name_ascii'] = $this->convert_vi_to_en($req['name']);
+            $this->repository->update($req, $id);
+            $request->session()->flash('success', 'cập nhật ' . self::TITLE . ' thành công');
+            return redirect()->route(self::URL_HOME);
+        }
+        return view(self::VIEW . '.add', [
             'data' => $findId,
             'lang_code' => LANGUAGE,
             'page_title' => $titleBreadCrumb['page_title'],
@@ -84,9 +80,13 @@ class SliderController extends Controller
         $page = (int)$_REQUEST['start'];
         $limit = (int)$_REQUEST['length'];
 
-        $dataJson = $this->sliderRepository->paginate($options,null,$page,$limit);
-        $dataJson =$this->formatData($dataJson);
-        $total = $this->sliderRepository->findAll()->count();
+        $dataJson = $this->repository->paginate($options, null, $page, $limit);
+        $dataJson = $this->formatData($dataJson);
+        if (empty($options)) {
+            $total = $this->repository->findAll()->count();
+        } else {
+            $total = count($dataJson);
+        }
 
 
         $secho = 0;

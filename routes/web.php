@@ -22,6 +22,35 @@ Route::group(['prefix' => 'sliders'], function () {
     Route::get('/add','SliderController@add')->name('sliders.add');
     Route::post('/add','SliderController@add')->name('sliders.add.post');
     Route::get('edit/{id}','SliderController@edit')->name('sliders.edit');
+    Route::post('edit/{id}','SliderController@edit')->name('sliders.edit.post');
     Route::get('dataTables','SliderController@dataTable')->name('sliders.dataTable');
 });
-Route::get('abc/add','SliderController@add')->name('abc.add');
+
+Route::group(['prefix' => 'investors'], function () {
+    Route::get('/','InvestorController@index')->name('investors');
+    Route::get('/add','InvestorController@add')->name('investors.add');
+    Route::post('/add','InvestorController@add')->name('investors.add.post');
+    Route::get('edit/{id}','InvestorController@edit')->name('investors.edit');
+    Route::post('edit/{id}','InvestorController@edit')->name('investors.edit.post');
+    Route::get('dataTables','InvestorController@dataTable')->name('investors.dataTable');
+});
+
+
+Route::group(['prefix' => 'project-sales'], function () {
+    Route::get('/','ProjectSaleController@index')->name('project-sales');
+    Route::get('/add','ProjectSaleController@add')->name('project-sales.add');
+    Route::post('/add','ProjectSaleController@add')->name('project-sales.add.post');
+    Route::get('edit/{id}','ProjectSaleController@edit')->name('project-sales.edit');
+    Route::post('edit/{id}','ProjectSaleController@edit')->name('project-sales.edit.post');
+    Route::get('dataTables','ProjectSaleController@dataTable')->name('project-sales.dataTable');
+});
+
+Route::group(['prefix' => 'cities'], function () {
+    Route::get('/','CityController@index')->name('cities');
+    Route::get('/add','CityController@add')->name('cities.add');
+    Route::post('/add','CityController@add')->name('cities.add.post');
+    Route::get('edit/{id}','CityController@edit')->name('cities.edit');
+    Route::post('edit/{id}','CityController@edit')->name('cities.edit.post');
+    Route::get('dataTables','CityController@dataTable')->name('cities.dataTable');
+    Route::get('generate','CityController@generate')->name('cities.generate');
+});

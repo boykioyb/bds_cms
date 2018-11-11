@@ -4,14 +4,11 @@ namespace App\Repositories;
 
 use App\Repositories\Contracts\RepositoryInterface;
 use Jenssegers\Mongodb\Eloquent\Model;
-use Illuminate\Support\Collection;
-use Carbon\Carbon;
 use Illuminate\Container\Container as App;
-
 abstract class BaseRepository implements RepositoryInterface
 {
     protected $model;
-
+    protected $app;
     public function __construct()
     {
         $this->app = new App();
@@ -23,9 +20,6 @@ abstract class BaseRepository implements RepositoryInterface
     public function makeModel()
     {
         $model = $this->app->make($this->model());
-        if (!$model instanceof Model) {
-            throw new \Exception("Class {$this->model()} must be an instance of Illuminate\\Database\\Eloquent\\Model");
-        }
 
         return $this->model = $model;
     }

@@ -34,8 +34,10 @@
     <!--begin::Page Vendors Styles -->
     <link href="{{ asset('assets/vendors/custom/fullcalendar/fullcalendar.bundle.css') }}" rel="stylesheet"
           type="text/css"/>
-
+    <link rel="stylesheet" href="{{ asset('assets/tagsinput/bootstrap-tagsinput.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/rainbow.css') }}">
 @yield('css')
+@yield('css-yoast')
 <!--RTL version:<link href="assets/vendors/custom/fullcalendar/fullcalendar.bundle.rtl.css" rel="stylesheet" type="text/css" />-->
 
     <!--end::Page Vendors Styles -->
@@ -141,9 +143,8 @@
 
 <!--begin::Page Vendors -->
 <script src="{{ asset('assets/vendors/custom/fullcalendar/fullcalendar.bundle.js') }}" type="text/javascript"></script>
-
+<script src="{{ asset('tinymce/tinymce.min.js') }}"></script>
 <!--end::Page Vendors -->
-
 <!--begin::Page Scripts -->
 {{--<script src="{{ asset('assets/app/js/dashboard.js') }}" type="text/javascript"></script>--}}
 <script>
@@ -154,6 +155,7 @@
     @endif
     @endforeach
 </script>
+@yield('add-js')
 @yield('script')
 <script src="{{ asset('js/global.js') }}"></script>
 @yield('js')

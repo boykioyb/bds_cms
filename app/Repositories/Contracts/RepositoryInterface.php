@@ -10,7 +10,7 @@ interface RepositoryInterface
 
     public function create($data);
 
-    public function update(array $data, $id, $attribute = 'id', $withSoftDeletes = false);
+    public function update($data, $id, $attribute = 'id', $withSoftDeletes = false);
 
     public function delete($id);
 

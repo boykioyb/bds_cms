@@ -14,5 +14,8 @@
         "cross-env": "^5.1",
         "laravel-mix": "^2.0",
         "lodash": "^4.17.5"
+    },
+    "dependencies": {
+        "yoastseo": "^1.42.0"
     }
 }

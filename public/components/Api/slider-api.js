@@ -23,8 +23,20 @@ var DatatablesDataSourceAjaxServer = {
             ],
             columnDefs: [{
                 targets: -1, title: "Thao tác", orderable: !1, render: function (a, e, t, n) {
-                    return '\n                        <span class="dropdown">\n                            <a href="#" class="btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="dropdown" aria-expanded="true">\n                              <i class="la la-ellipsis-h"></i>\n                            </a>\n                            <div class="dropdown-menu dropdown-menu-right">\n                                <a class="dropdown-item" href="#"><i class="la la-edit"></i> Edit Details</a>\n                                <a class="dropdown-item" href="#"><i class="la la-leaf"></i> Update Status</a>\n                                <a class="dropdown-item" href="#"><i class="la la-print"></i> Generate Report</a>\n                            </div>\n                        </span>\n                        <a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill" title="View">\n                          <i class="la la-edit"></i>\n                        </a>'
+                    let action = '<a href="/sliders/edit/' + t._id + '" class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill" title="sửa">';
+                    action += '<i class="la la-edit"></i>';
+                    action += '</a>';
+                    return action
                 }
+            },{
+                targets: 1,render:function (a, e, t, n) {
+                    var s = {
+                        'BANNER_TOP': 'Banner trên',
+                        'BANNER_BOTTOM': 'Banner dưới',
+                    };
+                    return void 0 === s[a] ? a : s[a]
+                }
+
             }, {
                 targets: 5, render: function (a, e, t, n) {
                     var s = {

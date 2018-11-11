@@ -36,7 +36,7 @@ class SliderRepository extends BaseRepository
         return $this->model::create($data);
     }
 
-    public function update($data, $id, $attribute = 'id', $withSoftDeletes = false)
+    public function update($data = [], $id, $attribute = '_id', $withSoftDeletes = false)
     {
         if ($withSoftDeletes) {
             $this->newQuery()->eagerLoadTrashed();
@@ -45,7 +45,7 @@ class SliderRepository extends BaseRepository
         $this->makeModel();
         $this->model->where($attribute, '=', $id)->update($data);
 
-        return $this->findBy($attribute, $id);
+        return$this->model::find($id);
     }
 
     public function delete($id)

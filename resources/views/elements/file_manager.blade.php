@@ -1,3 +1,9 @@
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/animate.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/fancybox/jquery.fancybox-1.3.4.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/prettyPhoto.css') }}">
+
+@endsection
 <?php
 $str = 'field_id=' . $id;
 if (isset($option['type'])) {
@@ -10,35 +16,52 @@ if (isset($option['multiple'])) {
     $str .= '&multiple=' . $option['multiple'];
 }
 ?>
+<div class="form-group m-form__group row">
+    <label class="col-lg-2 col-form-label">{{ !empty($label) ? $label : '' }}:</label>
 
-<label class="form-control-label">{{ !empty($label) ? $label : '' }}:</label>
-<div class="input-group">
-    <div class="input-group-prepend">
-        <button
-            href="{{asset('responsive_filemanager/filemanager/dialog.php?'. $str)}}"
-            class="btn btn-primary {{ $id }}-btn" type="button">Chọn
-            files
-        </button>
-    </div>
-    <input id="{{ $id }}" type="text" name="{{ $name }}"
-           class="form-control form-inline m-input" value="{{ !empty($files) ? json_encode($files) : '' }}"
-           readonly>
-    <div id="cont-{{ $id }}">
-        @if(!empty($files))
-            <ul class="menu-files">
-                @foreach($files as $val)
-                    <li>
-                        <img src="{{ getenv('BASE_URL').'uploads/' . $val }}"/><span>{{$val}}</span>
-                    </li>
-                @endforeach
-            </ul>
-        @endif
+    <div class="col-lg-8">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <button
+                    href="{{asset('responsive_filemanager/filemanager/dialog.php?'. $str)}}"
+                    class="btn btn-primary {{ $id }}-btn" type="button">Chọn
+                    files
+                </button>
+            </div>
+            <input id="{{ $id }}" type="text" name="{{ $name }}"
+                   class="form-control form-inline m-input" value="{{ !empty($files) ? json_encode($files) : '' }}"
+                   readonly>
+            <br>
+            <div id="cont-{{ $id }}" class=" col-lg-12">
+                @if(!empty($files))
+                    <ul class="menu-files">
+                        @foreach($files as $val)
+                            <li>
+                                <img src="{{ getenv('BASE_URL').'uploads/' . $val }}"/><span>{{$val}}</span>
+                            </li>
+                        @endforeach
+                    </ul>
+                @endif
 
+            </div>
+        </div>
     </div>
 </div>
 
-@section('js')
-    @include('elements.file_manager_asset')
+@section('js-file')
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-migrate-1.2.1.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.easing.js') }}"></script>
+    <script src="{{ asset('js/jquery.prettyPhoto-3.1.4-W3C.js') }}"></script>
+    <script src="{{ asset('js/jquery.ui.totop.js') }}"></script>
+    <script src="{{ asset('js/jquery.inview.js') }}"></script>
+    <script src="{{ asset('js/jquery.parallax-1.1.3.js') }}"></script>
+    <script src="{{ asset('js/jquery.localscroll-1.2.7-min.js') }}"></script>
+    <script src="{{ asset('js/jquery.scrollTo-1.4.2-min.js') }}"></script>
+    <script src="{{ asset('js/jquery.fancybox-1.3.4.pack.js') }}"></script>
+    <script src="{{ asset('js/jquery.fitvids.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.nicescroll.min.js') }}"></script>
     <script>
         jQuery(document).ready(function ($) {
             $('.{{ $id }}-btn').fancybox({
@@ -76,9 +99,8 @@ if (isset($option['multiple'])) {
 
         function responsive_filemanager_callback(field_id) {
             $('#cont-{{ $id }}').html('');
-            console.log(field_id);
             let fields, html = '<ul class="menu-files">';
-            var url = jQuery('#' + field_id).val();
+            var url = $('#' + field_id).val();
             //alert('update '+field_id+" with "+url);
             //your code
             var str = document.getElementById(field_id).value;

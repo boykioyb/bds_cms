@@ -21,7 +21,7 @@
     <label class="col-lg-2 col-form-label">Meta Keywords:</label>
     <div class="col-lg-8">
         <input id="keywords" type="text" class="form-control m-input" name="meta_keyword"
-               placeholder="Nhập tiêu đề"
+               placeholder="Nhập từ khóa"
                value="{{ isset($data->meta_keyword) && !empty($data->meta_keyword) ? $data->meta_keyword : '' }}">
         <span
             class="m-form__help">Cách nhau bởi dấu , (VD: a,b).</span>

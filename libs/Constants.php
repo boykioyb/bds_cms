@@ -8,6 +8,18 @@ define('STATUS', [
     1 => 'Kích hoạt',
     2 => 'Xóa',
 ]);
+
+define('PRIORITY',[
+    0 => 'Không ưu tiên',
+    1 => 'Ưu tiên cấp 1',
+    2 => 'Ưu tiên cấp 2',
+    3 => 'Ưu tiên cấp 3'
+]);
+define('AREA',[
+    1 => 'Nội thành',
+    2 => 'Ngoại thành',
+]);
+
 define('CODE_SLIDER', [
     'BANNER_TOP' => 'Banner trên',
     'BANNER_BOTTOM' => 'Banner dưới'

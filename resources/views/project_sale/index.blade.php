@@ -34,7 +34,7 @@
                     <div class="row m--margin-bottom-20">
                         <div class="col-lg-3 m--margin-bottom-10-tablet-and-mobile">
                             <label>Ngôn ngữ:</label>
-                            <select name="lang_code" class="form-control m-input" id="type" data-col-index="3">
+                            <select name="lang_code" class="form-control m-input" id="type">
                                 <option value="">--- Chọn ngôn ngữ ---</option>
                                 @foreach(LANGUAGE as $k => $val)
                                     <option value="{{ $k }}">{{ $val }}</option>
@@ -43,7 +43,7 @@
                         </div>
                         <div class="col-lg-3 m--margin-bottom-10-tablet-and-mobile">
                             <label>Số điện thoại:</label>
-                            <input type="text" class="form-control m-input" name="phone" data-col-index="1">
+                            <input type="text" class="form-control m-input" name="phone">
                         </div>
                         <div class="col-lg-3 m--margin-bottom-10-tablet-and-mobile">
                             <label>Tên:</label>
@@ -53,7 +53,7 @@
 
                         <div class="col-lg-3 m--margin-bottom-10-tablet-and-mobile">
                             <label>Trạng thái:</label>
-                            <select name="status" class="form-control m-input" id="status" data-col-index="5">
+                            <select name="status" class="form-control m-input" id="status">
                                 <option value="">--- Trạng thái ---</option>
                                 @foreach(STATUS as $k => $val)
                                     <option value="{{ $k }}">{{ $val }}</option>
@@ -85,10 +85,9 @@
                     <thead>
                     <tr>
                         <th>STT</th>
-                        <th>Số điện thoại</th>
-                        <th>Tên Slider</th>
-                        <th>Ngôn ngữ</th>
-                        <th>Địa chỉ</th>
+                        <th>Tên</th>
+                        <th>Thông tin</th>
+                        <th>Chế độ ưu tiên</th>
                         <th>Trạng thái</th>
                         <th>Thao tác</th>
                     </tr>
@@ -102,5 +101,5 @@
 @endsection
 @section('js')
     <script src="{{ asset('assets/vendors/custom/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('components/Api/investor-api.js') }}"></script>
+    <script src="{{ asset('components/Api/project-sale-api.js') }}"></script>
 @endsection

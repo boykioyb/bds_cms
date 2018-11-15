@@ -1,9 +1,9 @@
 //== Class definition
 
-var FormControls = function () {
+var FormControls = function ($) {
     //== Private functions
 
-    var demo1 = function () {
+    var demo1 = function ($) {
         $( "#m_form_add_update" ).validate({
             // define validation rules
             rules: {
@@ -81,12 +81,12 @@ var FormControls = function () {
 
     return {
         // public functions
-        init: function() {
-            demo1();
+        init: function($) {
+            demo1($);
         }
     };
 }();
 
-jQuery(document).ready(function() {
-    FormControls.init();
+jQuery(document).ready(function($) {
+    FormControls.init($);
 });

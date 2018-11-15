@@ -43,6 +43,7 @@ Route::group(['prefix' => 'project-sales'], function () {
     Route::get('edit/{id}','ProjectSaleController@edit')->name('project-sales.edit');
     Route::post('edit/{id}','ProjectSaleController@edit')->name('project-sales.edit.post');
     Route::get('dataTables','ProjectSaleController@dataTable')->name('project-sales.dataTable');
+    Route::post('getDistrict','ProjectSaleController@getDistrict')->name('project-sales.getDistrict');
 });
 
 Route::group(['prefix' => 'cities'], function () {

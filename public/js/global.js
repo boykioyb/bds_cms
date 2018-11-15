@@ -108,3 +108,11 @@ tinymce.init({
     }
 });
 
+jQuery(document).ready(function ($) {
+    $(".tags-input").select2({
+        placeholder: "Add a tag",
+        tags: !0,
+        allowClear: true,
+        closeOnSelect: true,
+    });
+});

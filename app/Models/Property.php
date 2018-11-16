@@ -2,58 +2,44 @@
 
 namespace App\Models;
 
+use App\BaseModel;
+use MongoDB\BSON\ObjectId;
+
 class Property extends BaseModel
 {
     public $collection = 'properties';
-    public $fillable = [
-        'status',
-    ];
+    protected $guarded = [];
 
-
-    public $customSchema = array(
-        'id' => null,
-        'categories' => null,
-        'project_sales' => null,
-        'data_locale' => [
-            'name' => '',
-            'name_ascii' => '',
-            'url_alias' => '',
-            'tags' => '',
-            'short_description' => '',
-            'description' => '',
-            'meta_title' => '',
-            'meta_description' => '',
-            'meta_tags' => '',
-            'meta_keywords' => '',
-            'weight' => 0,
-            'status' => 0,
-            'priority' => 0,
-        ],
-        'mode' => 0,
-        'price' => 0,
-        'price_sale' => 0,
-        'detail_room' => array(
-            'beds' => 0, // số phòng ngủ
-            'baths' => 0, // số phòng tắm
-            'acreage' => 0, //diện tích,
-            'garages' => 0, // gara ô tô
-            'kitchen' => 0, //phòng bếp
-            'balcony' => 0, // ban công
-        ),
-        'start_date' => '',
-        'end_date' => '',
-        'files' => [
-            'logo' => null,
-            'image' => null,
-            'video' => null
-        ],
-        'owner' => '',
-        'created' => null,
-        'modified' => null,
-    );
-    public $asciiFields = array(
-        'data_locale.name',
-        'data_locale.tags',
-    );
-
+    public static function SCHEMAS()
+    {
+        return [
+            'project_sales' => ['type' => ObjectId::class, 'default' => new ObjectId()],
+            'lang_code' => ['type' => 'string', 'default' => null],
+            'name' => ['type' => 'string', 'default' => null],
+            'name_ascii' => ['type' => 'string', 'default' => null],
+            'url_alias' => ['type' => 'string', 'default' => null],
+            'tags' => ['type' => 'array(string)'],
+            'short_description' => ['type' => 'string', 'default' => null],
+            'description' => ['type' => 'string', 'default' => null],
+            'priority' => ['type' => 'int', 'default' => null],
+            'meta_title' => ['type' => 'string', 'default' => null],
+            'meta_description' => ['type' => 'string', 'default' => null],
+            'meta_keywords' => ['type' => 'string', 'default' => null],
+            'weight' => ['type' => 'int', 'default' => null],
+            'status' => ['type' => 'int', 'default' => 0],
+            'mode' => ['type' => 'int', 'default' => 0],
+            'price' => ['type' => 'int', 'default' => 0],
+            'price_sale' => ['type' => 'int', 'default' => 0],
+            'beds' => ['type' => 'int', 'default' => 0],
+            'baths' => ['type' => 'int', 'default' => 0],
+            'acreage' => ['type' => 'int', 'default' => 0],
+            'garages' => ['type' => 'int', 'default' => 0],
+            'kitchen' => ['type' => 'int', 'default' => 0],
+            'balcony' => ['type' => 'int', 'default' => 0],
+            'start_date' => ['type' => 'date', 'default' => null],
+            'end_date' => ['type' => 'date', 'default' => null],
+            'owner' => ['type' => 'string', 'default' => null],
+            'files' => ['type' => 'array(string)'],
+        ];
+    }
 }

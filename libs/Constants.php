@@ -1,25 +1,32 @@
 <?php
 
-define('STATUS_INACTIVE',0);
-define('STATUS_ACTIVE',1);
-define('STATUS_DELELE',0);
+define('STATUS_INACTIVE', 0);
+define('STATUS_ACTIVE', 1);
+define('STATUS_DELELE', 0);
 define('STATUS', [
     0 => 'Không kích hoạt',
     1 => 'Kích hoạt',
     2 => 'Xóa',
 ]);
 
-define('PRIORITY',[
+define('PRIORITY', [
     0 => 'Không ưu tiên',
     1 => 'Ưu tiên cấp 1',
     2 => 'Ưu tiên cấp 2',
     3 => 'Ưu tiên cấp 3'
 ]);
-define('AREA',[
+define('AREA', [
     1 => 'Nội thành',
     2 => 'Ngoại thành',
 ]);
 
+define('NUMBERS', [
+    1 => 1,
+    2 => 2,
+    3 => 3,
+    4 => 4,
+    5 => 5
+]);
 define('CODE_SLIDER', [
     'BANNER_TOP' => 'Banner trên',
     'BANNER_BOTTOM' => 'Banner dưới'

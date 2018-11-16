@@ -11,7 +11,7 @@ var DatatablesDataSourceAjaxServer = {
             },
             processing: !0,
             serverSide: !0,
-            ajax: "/project-sales/dataTables",
+            ajax: "/properties/dataTables",
             columns: [
                 {data: null},
                 {data: "name"},

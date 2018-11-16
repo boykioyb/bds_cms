@@ -46,6 +46,16 @@ Route::group(['prefix' => 'project-sales'], function () {
     Route::post('getDistrict','ProjectSaleController@getDistrict')->name('project-sales.getDistrict');
 });
 
+Route::group(['prefix' => 'properties'], function () {
+    Route::get('/','PropertyController@index')->name('properties');
+    Route::get('/add','PropertyController@add')->name('properties.add');
+    Route::post('/add','PropertyController@add')->name('properties.add.post');
+    Route::get('edit/{id}','PropertyController@edit')->name('properties.edit');
+    Route::post('edit/{id}','PropertyController@edit')->name('properties.edit.post');
+    Route::get('dataTables','PropertyController@dataTable')->name('properties.dataTable');
+    Route::post('getDistrict','PropertyController@getDistrict')->name('properties.getDistrict');
+});
+
 Route::group(['prefix' => 'cities'], function () {
     Route::get('/','CityController@index')->name('cities');
     Route::get('/add','CityController@add')->name('cities.add');

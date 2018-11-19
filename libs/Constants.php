@@ -21,12 +21,15 @@ define('AREA', [
 ]);
 
 define('NUMBERS', [
+    0 => 0,
     1 => 1,
     2 => 2,
     3 => 3,
     4 => 4,
     5 => 5
 ]);
+
+
 define('CODE_SLIDER', [
     'BANNER_TOP' => 'Banner trên',
     'BANNER_BOTTOM' => 'Banner dưới'

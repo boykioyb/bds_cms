@@ -36,6 +36,12 @@ class PropertyController extends Controller
     {
         if ($request->isMethod("POST")) {
             $req = $request->request->all();
+
+            if(!empty($req['project_sales'])){
+                $req['project_sales'] = new ObjectId($req['project_sales']);
+            }
+            $req['start_date'] = $this->convertDateISO($req['start_date']);
+            $req['end_date'] = $this->convertDateISO($req['end_date']);
             $req['files'] = json_decode($req['files']);
             $req['name_ascii'] = $this->convert_vi_to_en($req['name']);
             $this->repository->create($req);
@@ -125,6 +131,7 @@ class PropertyController extends Controller
         $result = array();
         foreach ($data as $k => $v) {
             $arr['_id'] = $v->_id;
+            $arr['project_sales'] = $v->project_sales;
             $arr['lang_code'] = $v->lang_code;
             $arr['weight'] = $v->weight;
             $arr['status'] = $v->status;
@@ -133,22 +140,10 @@ class PropertyController extends Controller
             $arr['url_alias'] = $v->url_alias;
             $arr['short_description'] = $v->short_description;
             $arr['description'] = $v->description;
-            $arr['city'] = $v->city;
-            $arr['district'] = $v->district;
-            $arr['address'] = $v->address;
-            $arr['type'] = $v->type;
-            $arr['scale'] = $v->scale;
-            $arr['functional'] = $v->functional;
-            $arr['design_consultancy'] = $v->design_consultancy;
-            $arr['pm_mc'] = $v->pm_mc;
             $arr['priority'] = $v->priority;
-            $arr['area'] = $v->area;
             $arr['meta_title'] = $v->meta_title;
             $arr['meta_description'] = $v->meta_description;
             $arr['meta_keyword'] = $v->meta_keyword;
-            $arr['land_area_of_study'] = $v->land_area_of_study;
-            $arr['construction_land_area'] = $v->construction_land_area;
-            $arr['construction_density'] = $v->construction_density;
             $arr['tags'] = json_encode($v->tags);
             $arr['files'] = json_encode($v->files);
             $arr['created_at'] = Carbon::parse($v->created_at)->format('d-m-Y');

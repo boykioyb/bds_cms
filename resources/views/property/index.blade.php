@@ -86,7 +86,7 @@
                     <tr>
                         <th>STT</th>
                         <th>Tên</th>
-                        <th>Thành Phố/Huyện</th>
+                        <th>Thuộc dự án</th>
                         <th>Thông tin</th>
                         <th>Chế độ ưu tiên</th>
                         <th>Trạng thái</th>
@@ -102,5 +102,5 @@
 @endsection
 @section('js')
     <script src="{{ asset('assets/vendors/custom/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('components/Api/project-sale-api.js') }}"></script>
+    <script src="{{ asset('components/Api/property-api.js') }}"></script>
 @endsection

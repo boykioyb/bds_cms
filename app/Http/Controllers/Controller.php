@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
@@ -46,5 +47,10 @@ class Controller extends BaseController
         }
         return $options;
     }
-
+    public function convertDateISO($date = null){
+        if ($date == null){
+            return Carbon::now();
+        }
+        return Carbon::createFromFormat('Y-d-m H:i:s.u',date('Y-m-d H:i:s.u',strtotime($date)));
+    }
 }

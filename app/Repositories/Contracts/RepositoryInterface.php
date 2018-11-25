@@ -6,19 +6,17 @@ interface RepositoryInterface
 {
     public function findAll();
 
-    public function findById($id);
+    public function findById(string $id);
 
-    public function create($data);
+    public function create(array $data);
 
-    public function update($data, $id, $attribute = 'id', $withSoftDeletes = false);
+    public function update(array $data, string $id, string $attribute = 'id', bool $withSoftDeletes = false);
 
-    public function delete($id);
+    public function delete(string $id);
 
-    public function where($conditions, $operator = null, $value = null);
-
-    public function orWhere($conditions, $operator = null, $value = null);
+    public function where(array $conditions, string $operator = null, string $value = null);
 
     public function count();
 
-    public function paginate($option, $operator = null, $page = null, $limit = null);
+    public function paginate(array  $option,string $operator = null, int $page = null, int $limit = null);
 }

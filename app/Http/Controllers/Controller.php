@@ -48,9 +48,8 @@ class Controller extends BaseController
         return $options;
     }
     public function convertDateISO($date = null){
-        if ($date == null){
-            return Carbon::now();
-        }
-        return Carbon::createFromFormat('Y-d-m H:i:s.u',date('Y-m-d H:i:s.u',strtotime($date)));
+        $datetime = new \DateTime(date('Y-m-d H:i:s',strtotime($date)));
+
+        return ($datetime->format(\DateTime::ATOM));
     }
 }

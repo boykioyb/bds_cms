@@ -23,7 +23,7 @@ var DatatablesDataSourceAjaxServer = {
             ],
             columnDefs: [{
                 targets: -1, title: "Thao tác", orderable: !1, render: function (a, e, t, n) {
-                    let action = '<a href="/project-sales/edit/' + t._id + '" class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill" title="sửa">';
+                    let action = '<a href="/properties/edit/' + t._id + '" class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill" title="sửa">';
                     action += '<i class="la la-edit"></i>';
                     action += '</a>';
                     return action

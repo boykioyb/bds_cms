@@ -9,11 +9,12 @@ class Property extends BaseModel
 {
     public $collection = 'properties';
     protected $guarded = [];
-
+    protected $dates = ['start_date','end_date'];
     public static function SCHEMAS()
     {
         return [
-            'project_sales' => ['type' => ObjectId::class, 'default' =>null],
+            'categories' => ['type' => 'string', 'default' =>null],
+            'project_sales' => ['type' => 'string', 'default' =>null],
             'lang_code' => ['type' => 'string', 'default' => null],
             'name' => ['type' => 'string', 'default' => null],
             'name_ascii' => ['type' => 'string', 'default' => null],

@@ -2,6 +2,8 @@
 
 
 namespace App\Helpers;
+use Carbon\Carbon;
+
 class AppClass
 {
 
@@ -76,5 +78,9 @@ class AppClass
         }
 
         return $data;
+    }
+
+    public final function formatDate($date):string {
+        return Carbon::parse($date)->format('d-m-Y');
     }
 }

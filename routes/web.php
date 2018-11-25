@@ -65,3 +65,12 @@ Route::group(['prefix' => 'cities'], function () {
     Route::get('dataTables','CityController@dataTable')->name('cities.dataTable');
     Route::get('generate','CityController@generate')->name('cities.generate');
 });
+
+Route::group(['prefix' => 'categories'], function () {
+    Route::get('/','CategoryController@index')->name('categories');
+    Route::get('/add','CategoryController@add')->name('categories.add');
+    Route::post('/add','CategoryController@add')->name('categories.add.post');
+    Route::get('edit/{id}','CategoryController@edit')->name('categories.edit');
+    Route::post('edit/{id}','CategoryController@edit')->name('categories.edit.post');
+    Route::get('dataTables','CategoryController@dataTable')->name('categories.dataTable');
+});

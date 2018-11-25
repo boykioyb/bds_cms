@@ -2,37 +2,37 @@
 
 namespace App\Repositories;
 
-use App\Models\City;
+use App\Models\Category;
 
-class CityRepository extends BaseRepository
+class CategoryRepository extends BaseRepository
 {
     const PAGE_DEFAULT = 0;
     const LIMIT_DEFAULT = 10;
 
     public final function model(): string
     {
-        return City::class;
+        return Category::class;
     }
 
-    public final function findAll(): array
+    public final function findAll()
     {
         $this->makeModel();
         return $this->model()::all();
     }
 
-    public final function findById(string $id):array
+    public final function findById(string $id)
     {
         $this->makeModel();
         return $this->model()::find($id);
     }
 
-    public final function create(array $data):array
+    public final function create(array $data)
     {
         $this->makeModel();
         return $this->model::create($data);
     }
 
-    public final function update(array $data,string $id,string $attribute = '_id',bool $withSoftDeletes = false): array
+    public final function update(array $data,string $id,string $attribute = '_id',bool $withSoftDeletes = false)
     {
         if ($withSoftDeletes) {
             $this->newQuery()->eagerLoadTrashed();
@@ -51,7 +51,7 @@ class CityRepository extends BaseRepository
         return $this->model()->destroy($id);
     }
 
-    public final function where( array $conditions, string $operator = null,string $value = null):array
+    public final function where( array $conditions, string $operator = null,string $value = null)
     {
         $this->makeModel();
         $result = $this->model();
@@ -67,7 +67,7 @@ class CityRepository extends BaseRepository
         return $result;
     }
 
-    public final function count():int
+    public final function count()
     {
         $this->newQuery()
             ->loadWhere();
@@ -75,7 +75,7 @@ class CityRepository extends BaseRepository
         return $this->model->count();
     }
 
-    public final function paginate(array $option,string $operator = null, int $page = null,int $limit = null):array
+    public final function paginate(array $option,string $operator = null, int $page = null,int $limit = null)
     {
         if (empty($page)) {
             $page = self::PAGE_DEFAULT;

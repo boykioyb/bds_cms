@@ -75,6 +75,19 @@
                                     </div>
                                 </div>
                                 <div class="form-group m-form__group row">
+                                    <label class="col-lg-2 col-form-label">Danh mục:</label>
+                                    <div class="col-lg-8">
+                                        <select name="project_sales" id="project_sales" class="form-control">
+                                            <option value="">--- Chọn danh mục ---</option>
+                                            @foreach($categories as $key => $val)
+                                                <option
+                                                    {{ !empty($data->categories) && $data->categories == $val->_id ? 'selected' : '' }} value="{{ $val->_id }}">{{ $val->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="form-group m-form__group row">
                                     <label class="col-lg-2 col-form-label">Dự án:</label>
                                     <div class="col-lg-8">
                                         <select name="project_sales" id="project_sales" class="form-control">
@@ -142,7 +155,8 @@
                                     <div class="col-lg-1">
                                         <select name="beds" id="" class="form-control">
                                             @foreach(NUMBERS as $k => $val)
-                                                <option value="{{ $k }}">{{$val}}</option>
+                                                <option
+                                                    {{ !empty($data->beds) && $data->beds == $k ? 'selected' : '' }} value="{{ $k }}">{{$val}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -150,7 +164,8 @@
                                     <div class="col-lg-1">
                                         <select name="baths" id="" class="form-control">
                                             @foreach(NUMBERS as $k => $val)
-                                                <option value="{{ $k }}">{{$val}}</option>
+                                                <option
+                                                    {{ !empty($data->baths) && $data->baths == $k ? 'selected' : '' }} value="{{ $k }}">{{$val}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -158,7 +173,8 @@
                                     <div class="col-lg-1">
                                         <select name="garages" id="" class="form-control">
                                             @foreach(NUMBERS as $k => $val)
-                                                <option value="{{ $k }}">{{$val}}</option>
+                                                <option
+                                                    {{ !empty($data->garages) && $data->garages == $k ? 'selected' : '' }} value="{{ $k }}">{{$val}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -166,7 +182,8 @@
                                     <div class="col-lg-1">
                                         <select name="kitchen" id="" class="form-control">
                                             @foreach(NUMBERS as $k => $val)
-                                                <option value="{{ $k }}">{{$val}}</option>
+                                                <option
+                                                    {{ !empty($data->kitchen) && $data->kitchen == $k ? 'selected' : '' }} value="{{ $k }}">{{$val}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -177,14 +194,17 @@
                                     <div class="col-lg-1">
                                         <select name="balcony" id="" class="form-control">
                                             @foreach(NUMBERS as $k => $val)
-                                                <option value="{{ $k }}">{{$val}}</option>
+                                                <option
+                                                    {{ !empty($data->balcony) && $data->balcony == $k ? 'selected' : '' }} value="{{ $k }}">{{$val}}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <label class="col-lg-1 col-form-label">Diện tích:</label>
                                     <div class="col-lg-2">
                                         <div class="m-input-icon m-input-icon--right">
-                                            <input type="number" min="0" name="acreage" class="form-control">
+                                            <input type="number" min="0" name="acreage" class="form-control"
+                                                   value="{{ isset($data->acreage) && !empty($data->acreage) ? $data->acreage : '' }}"
+                                            >
                                             <span
                                                 class="m-input-icon__icon m-input-icon__icon--right"><span><i>m<sup>2</sup></i></span></span>
                                         </div>
@@ -193,11 +213,27 @@
                                 <div class="form-group m-form__group row">
                                     <label class="col-lg-2 col-form-label">Giá:</label>
                                     <div class="col-lg-3">
-                                        <input type="text" class="form-control" name="price">
+                                        <div class="m-input-icon m-input-icon--right">
+                                            <input type="text" class="form-control" name="price"
+                                                   onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                                                   onkeyup="this.value=FormatNumber(this.value);"
+                                                   value="{{ isset($data->price) && !empty($data->price) ? number_format($data->price, 0, ',', ',') : '' }}"
+                                            >
+                                            <span
+                                                class="m-input-icon__icon m-input-icon__icon--right"><span><i class="fa fa-money-bill-wave"></i></span></span>
+                                        </div>
                                     </div>
                                     <label class="col-lg-2 col-form-label">Giá Sale:</label>
                                     <div class="col-lg-3">
-                                        <input type="text" class="form-control" name="price_sale">
+                                        <div class="m-input-icon m-input-icon--right">
+                                        <input type="text" class="form-control" name="price_sale"
+                                               onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                                               onkeyup="this.value=FormatNumber(this.value);"
+                                               value="{{ isset($data->price_sale) && !empty($data->price_sale) ? number_format($data->price_sale, 0, ',', ',') : '' }}"
+                                        >
+                                            <span
+                                                class="m-input-icon__icon m-input-icon__icon--right"><span><i class="fa fa-money-bill-wave"></i></span></span>
+                                        </div>
                                     </div>
 
                                 </div>
@@ -208,7 +244,8 @@
                                             <input type="text" name="start_date" class="form-control m-input datepicker"
                                                    readonly=""
                                                    placeholder="Select date" id=""
-                                                   value="">
+                                                   value="{{ isset($data->start_date) && !empty($data->start_date) ? \AppClass::formatDate($data->start_date) : '' }}"
+                                            >
                                             <div class="input-group-append">
 													<span class="input-group-text">
 														<i class="la la-calendar-check-o"></i>
@@ -222,7 +259,8 @@
                                             <input type="text" name="end_date" class="form-control m-input datepicker"
                                                    readonly=""
                                                    placeholder="Select date" id=""
-                                                   value="">
+                                                   value="{{ isset($data->end_date) && !empty($data->end_date) ? \AppClass::formatDate($data->end_date)  : '' }}"
+                                            >
                                             <div class="input-group-append">
 													<span class="input-group-text">
 														<i class="la la-calendar-check-o"></i>

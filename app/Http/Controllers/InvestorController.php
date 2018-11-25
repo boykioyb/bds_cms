@@ -31,6 +31,7 @@ class InvestorController extends Controller
     public function add(Request $request)
     {
         if ($request->isMethod("POST")) {
+
             $req = $request->request->all();
             $req['name_ascii'] = $this->convert_vi_to_en($req['name']);
             $this->repository->create($req);

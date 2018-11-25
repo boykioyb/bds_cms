@@ -34,7 +34,7 @@
                     <div class="row m--margin-bottom-20">
                         <div class="col-lg-3 m--margin-bottom-10-tablet-and-mobile">
                             <label>Ngôn ngữ:</label>
-                            <select name="lang_code" class="form-control m-input" id="type">
+                            <select name="lang_code" class="form-control m-input" id="type" data-col-index="3">
                                 <option value="">--- Chọn ngôn ngữ ---</option>
                                 @foreach(LANGUAGE as $k => $val)
                                     <option value="{{ $k }}">{{ $val }}</option>
@@ -42,8 +42,13 @@
                             </select>
                         </div>
                         <div class="col-lg-3 m--margin-bottom-10-tablet-and-mobile">
-                            <label>Số điện thoại:</label>
-                            <input type="text" class="form-control m-input" name="phone">
+                            <label>Mã:</label>
+                            <select name="code" class="form-control m-input" id="type" data-col-index="1">
+                                <option value="">--- Chọn mã ---</option>
+                                @foreach(CODE_SLIDER as $k => $val)
+                                    <option value="{{ $k }}">{{ $val }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="col-lg-3 m--margin-bottom-10-tablet-and-mobile">
                             <label>Tên:</label>
@@ -53,7 +58,7 @@
 
                         <div class="col-lg-3 m--margin-bottom-10-tablet-and-mobile">
                             <label>Trạng thái:</label>
-                            <select name="status" class="form-control m-input" id="status">
+                            <select name="status" class="form-control m-input" id="status" data-col-index="5">
                                 <option value="">--- Trạng thái ---</option>
                                 @foreach(STATUS as $k => $val)
                                     <option value="{{ $k }}">{{ $val }}</option>
@@ -85,10 +90,10 @@
                     <thead>
                     <tr>
                         <th>STT</th>
-                        <th>Tên</th>
-                        <th>Thuộc dự án</th>
-                        <th>Thông tin</th>
-                        <th>Chế độ ưu tiên</th>
+                        <th>Mã</th>
+                        <th>Tên danh mục</th>
+                        <th>Ngôn ngữ</th>
+                        <th>Đường dẫn</th>
                         <th>Trạng thái</th>
                         <th>Thao tác</th>
                     </tr>
@@ -102,5 +107,5 @@
 @endsection
 @section('js')
     <script src="{{ asset('assets/vendors/custom/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('components/Api/property-api.js') }}"></script>
+    <script src="{{ asset('components/Api/category-api.js') }}"></script>
 @endsection

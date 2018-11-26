@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use MongoDB\BSON\ObjectId;
 
 class Controller extends BaseController
 {
@@ -47,9 +48,27 @@ class Controller extends BaseController
         }
         return $options;
     }
-    public function convertDateISO($date = null){
-        $datetime = new \DateTime(date('Y-m-d H:i:s',strtotime($date)));
 
-        return ($datetime->format(\DateTime::ATOM));
+    public function convertDateISO(string $date = null)
+    {
+        return Carbon::parse(date('Y-m-d H:i:s',strtotime($date)),"UTC");
+    }
+
+    public function dataNormalization($schema, &$option)
+    {
+        foreach ($schema as $k => $val) {
+            switch ($val['type']) {
+                case 'int';
+                    if ($option[$k] != '') {
+                        $option[$k] = (int)$option[$k];
+                    }
+                    break;
+                case "MongoDB\BSON\ObjectId";
+                    if (!empty($option[$k])) {
+                        $option[$k] = new ObjectId($option[$k]);
+                    }
+                    break;
+            }
+        }
     }
 }

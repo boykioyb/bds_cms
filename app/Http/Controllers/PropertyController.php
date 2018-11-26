@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Property;
 use App\Repositories\ProjectSaleRepository;
 use App\Repositories\PropertyRepository;
 use Carbon\Carbon;
@@ -48,7 +49,14 @@ class PropertyController extends Controller
 
             $req['files'] = json_decode($req['files']);
             $req['name_ascii'] = $this->convert_vi_to_en($req['name']);
-//            dump($req);die;
+            if (!empty($req['price'])) {
+                $req['price'] = (int)str_replace(',', '', $req['price']);
+            }
+            if (!empty($req['price_sale'])) {
+                $req['price_sale'] = (int)str_replace(',', '', $req['price_sale']);
+            }
+            $this->dataNormalization(Property::SCHEMAS(),$req);
+
             $this->repository->create($req);
             $request->session()->flash('success', 'Tạo mới ' . self::TITLE . ' thành công');
             return redirect()->route(self::URL_HOME);
@@ -76,16 +84,27 @@ class PropertyController extends Controller
         $categories = $this->categoryRepository->where(['lang_code' => app()->getLocale(), 'status' => STATUS_ACTIVE])->get();
         if ($request->isMethod('POST')) {
             $req = $request->request->all();
-            $req['files'] = json_decode($req['files']);
-            $req['name_ascii'] = $this->convert_vi_to_en($req['name']);
             if (!empty($req['start_date'])) {
                 $req['start_date'] = $this->convertDateISO($req['start_date']);
             }
             if (!empty($req['end_date'])) {
                 $req['end_date'] = $this->convertDateISO($req['end_date']);
             }
-//            dd($req);die;
+
+            $req['files'] = json_decode($req['files']);
+            $req['name_ascii'] = $this->convert_vi_to_en($req['name']);
+            if (!empty($req['price'])) {
+                $req['price'] = (int)str_replace(',', '', $req['price']);
+            }
+            if (!empty($req['price_sale'])) {
+                $req['price_sale'] = (int)str_replace(',', '', $req['price_sale']);
+            }
+
+            $this->dataNormalization(Property::SCHEMAS(),$req);
+
+//            dump($req);die;
             $this->repository->update($req, $id);
+
             $request->session()->flash('success', 'cập nhật ' . self::TITLE . ' thành công');
             return redirect()->route(self::URL_HOME);
         }

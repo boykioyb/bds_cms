@@ -53,7 +53,7 @@
                                         <select name="status" id="status" class="form-control">
                                             @foreach(STATUS as $key => $val)
                                                 <option
-                                                    {{ !empty($data->status) && $data->status == $k ? 'selected' : '' }} value="{{ $key }}">{{$val}}</option>
+                                                    {{ $data->status != '' && $data->status == $key ? 'selected' : '' }} value="{{ $key }}">{{$val}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -64,7 +64,7 @@
                                         <select name="priority" id="priority" class="form-control">
                                             @foreach(PRIORITY as $key => $val)
                                                 <option
-                                                    {{ !empty($data->priority) && $data->priority == $k ? 'selected' : '' }} value="{{ $key }}">{{$val}}</option>
+                                                    {{ !empty($data->priority) && $data->priority == $key ? 'selected' : '' }} value="{{ $key }}">{{$val}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -77,7 +77,7 @@
                                 <div class="form-group m-form__group row">
                                     <label class="col-lg-2 col-form-label">Danh mục:</label>
                                     <div class="col-lg-8">
-                                        <select name="project_sales" id="project_sales" class="form-control">
+                                        <select name="categories" id="categories" class="form-control">
                                             <option value="">--- Chọn danh mục ---</option>
                                             @foreach($categories as $key => $val)
                                                 <option
@@ -259,7 +259,7 @@
                                             <input type="text" name="end_date" class="form-control m-input datepicker"
                                                    readonly=""
                                                    placeholder="Select date" id=""
-                                                   value="{{ isset($data->end_date) && !empty($data->end_date) ? \AppClass::formatDate($data->end_date)  : '' }}"
+                                                   {{--value="{{ isset($data->end_date) && !empty($data->end_date) ? \AppClass::formatDate($data->end_date)  : '' }}"--}}
                                             >
                                             <div class="input-group-append">
 													<span class="input-group-text">

@@ -22,9 +22,9 @@ if (isset($option['multiple'])) {
     <div class="col-lg-8">
         <div class="input-group">
             <div class="input-group-prepend">
-                <button
-                    href="{{asset('responsive_filemanager/filemanager/dialog.php?'. $str)}}"
-                    class="btn btn-primary {{ $id }}-btn" type="button">Chọn
+                <button id="{{ $id }}-btn"
+                        href="{{asset('responsive_filemanager/filemanager/dialog.php?'. $str)}}"
+                        class="btn btn-primary " type="button">Chọn
                     files
                 </button>
             </div>
@@ -49,22 +49,9 @@ if (isset($option['multiple'])) {
 </div>
 
 @section('js-file')
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/jquery-migrate-1.2.1.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.easing.js') }}"></script>
-    <script src="{{ asset('js/jquery.prettyPhoto-3.1.4-W3C.js') }}"></script>
-    <script src="{{ asset('js/jquery.ui.totop.js') }}"></script>
-    <script src="{{ asset('js/jquery.inview.js') }}"></script>
-    <script src="{{ asset('js/jquery.parallax-1.1.3.js') }}"></script>
-    <script src="{{ asset('js/jquery.localscroll-1.2.7-min.js') }}"></script>
-    <script src="{{ asset('js/jquery.scrollTo-1.4.2-min.js') }}"></script>
-    <script src="{{ asset('js/jquery.fancybox-1.3.4.pack.js') }}"></script>
-    <script src="{{ asset('js/jquery.fitvids.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.nicescroll.min.js') }}"></script>
     <script>
         jQuery(document).ready(function ($) {
-            $('.{{ $id }}-btn').fancybox({
+            $('#{{ $id }}-btn').fancybox({
                 'width': 880,
                 'height': 570,
                 'type': 'iframe',
@@ -89,13 +76,10 @@ if (isset($option['multiple'])) {
                 }
             }
 
-            $('.{{ $id }}-btn').on('click', function () {
+            $('#{{ $id }}-btn').on('click', function () {
                 $(window).on('message', OnMessage);
             });
         });
-    </script>
-    <script>
-        base_url = "http://bds_cms.test:8080/";
 
         function responsive_filemanager_callback(field_id) {
             $('#cont-{{ $id }}').html('');

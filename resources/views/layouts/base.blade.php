@@ -159,6 +159,22 @@
 @yield('add-js')
 <script src="{{ asset('js/global.js') }}"></script>
 @yield('js')
+<script src="{{ asset('js/jquery.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/jquery-migrate-1.2.1.min.js') }}"></script>
+<script src="{{ asset('js/jquery.easing.js') }}"></script>
+<script src="{{ asset('js/jquery.prettyPhoto-3.1.4-W3C.js') }}"></script>
+<script src="{{ asset('js/jquery.ui.totop.js') }}"></script>
+<script src="{{ asset('js/jquery.inview.js') }}"></script>
+<script src="{{ asset('js/jquery.parallax-1.1.3.js') }}"></script>
+<script src="{{ asset('js/jquery.localscroll-1.2.7-min.js') }}"></script>
+<script src="{{ asset('js/jquery.scrollTo-1.4.2-min.js') }}"></script>
+<script src="{{ asset('js/jquery.fancybox-1.3.4.pack.js') }}"></script>
+<script src="{{ asset('js/jquery.fitvids.min.js') }}"></script>
+<script src="{{ asset('js/jquery.nicescroll.min.js') }}"></script>
+<script>
+    base_url = '{{ getenv('BASE_URL') }}';
+</script>
 @yield('js-file')
 
 <!--end::Page Scripts -->

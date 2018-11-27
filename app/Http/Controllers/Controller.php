@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use MongoDB\BSON\ObjectId;
+use MongoDB\BSON\UTCDateTime;
 
 class Controller extends BaseController
 {
@@ -51,7 +52,10 @@ class Controller extends BaseController
 
     public function convertDateISO(string $date = null)
     {
-        return Carbon::parse(date('Y-m-d H:i:s',strtotime($date)),"UTC");
+        $orig_date = new \DateTime(date('Y-m-d H:i:s', strtotime($date)));
+        $orig_date = $orig_date->getTimestamp();
+        $utcDateTime = new UTCDateTime($orig_date * 1000);
+        return $utcDateTime;
     }
 
     public function dataNormalization($schema, &$option)

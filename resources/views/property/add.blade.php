@@ -220,19 +220,21 @@
                                                    value="{{ isset($data->price) && !empty($data->price) ? number_format($data->price, 0, ',', ',') : '' }}"
                                             >
                                             <span
-                                                class="m-input-icon__icon m-input-icon__icon--right"><span><i class="fa fa-money-bill-wave"></i></span></span>
+                                                class="m-input-icon__icon m-input-icon__icon--right"><span><i
+                                                        class="fa fa-money-bill-wave"></i></span></span>
                                         </div>
                                     </div>
                                     <label class="col-lg-2 col-form-label">Giá Sale:</label>
                                     <div class="col-lg-3">
                                         <div class="m-input-icon m-input-icon--right">
-                                        <input type="text" class="form-control" name="price_sale"
-                                               onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                                               onkeyup="this.value=FormatNumber(this.value);"
-                                               value="{{ isset($data->price_sale) && !empty($data->price_sale) ? number_format($data->price_sale, 0, ',', ',') : '' }}"
-                                        >
+                                            <input type="text" class="form-control" name="price_sale"
+                                                   onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                                                   onkeyup="this.value=FormatNumber(this.value);"
+                                                   value="{{ isset($data->price_sale) && !empty($data->price_sale) ? number_format($data->price_sale, 0, ',', ',') : '' }}"
+                                            >
                                             <span
-                                                class="m-input-icon__icon m-input-icon__icon--right"><span><i class="fa fa-money-bill-wave"></i></span></span>
+                                                class="m-input-icon__icon m-input-icon__icon--right"><span><i
+                                                        class="fa fa-money-bill-wave"></i></span></span>
                                         </div>
                                     </div>
 
@@ -259,7 +261,7 @@
                                             <input type="text" name="end_date" class="form-control m-input datepicker"
                                                    readonly=""
                                                    placeholder="Select date" id=""
-                                                   {{--value="{{ isset($data->end_date) && !empty($data->end_date) ? \AppClass::formatDate($data->end_date)  : '' }}"--}}
+                                                   value="{{ isset($data->end_date) && !empty($data->end_date) ? \AppClass::formatDate($data->end_date)  : '' }}"
                                             >
                                             <div class="input-group-append">
 													<span class="input-group-text">
@@ -270,11 +272,23 @@
                                     </div>
 
                                 </div>
+
                                 @include('elements.file_manager',[
-                                                  'id' => 'image-id',
+                                                  'id' => 'avatar-id',
+                                                  'files' => !empty($data->avatar) ? $data->avatar : null,
+                                                  'name' => 'avatar',
+                                                  'label' => 'Chọn ảnh đại diện',
+                                                  'option' => array(
+                                                      'type' => 1,
+                                                      'relative_url' => 1,
+                                                  )
+                                              ])
+
+                                @include('elements.file_manager',[
+                                                  'id' => 'file-id',
                                                   'files' => !empty($data->files) ? $data->files : null,
                                                   'name' => 'files',
-                                                  'label' => 'Chọn ảnh',
+                                                  'label' => 'Chọn thư viện',
                                                   'option' => array(
                                                       'type' => 1,
                                                       'relative_url' => 1,

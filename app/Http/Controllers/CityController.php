@@ -35,6 +35,9 @@ class CityController extends Controller
             $req = $request->request->all();
             $req['files'] = json_decode($req['files']);
             $req['name_ascii'] = $this->convert_vi_to_en($req['name']);
+
+            $this->dataNormalization(City::SCHEMAS(),$req);
+
             $this->repository->create($req);
             $request->session()->flash('success', 'Tạo mới ' . self::TITLE . ' thành công');
             return redirect()->route(self::URL_HOME);
@@ -62,6 +65,9 @@ class CityController extends Controller
             $req = $request->request->all();
             $req['files'] = json_decode($req['files']);
             $req['name_ascii'] = $this->convert_vi_to_en($req['name']);
+
+            $this->dataNormalization(City::SCHEMAS(),$req);
+
             $this->repository->update($req, $id);
             $request->session()->flash('success', 'cập nhật ' . self::TITLE . ' thành công');
             return redirect()->route(self::URL_HOME);

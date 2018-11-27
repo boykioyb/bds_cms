@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Investor;
 use App\Repositories\InvestorRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -34,12 +35,14 @@ class InvestorController extends Controller
 
             $req = $request->request->all();
             $req['name_ascii'] = $this->convert_vi_to_en($req['name']);
+            $this->dataNormalization(Investor::SCHEMAS(), $req);
+
             $this->repository->create($req);
             $request->session()->flash('success', 'Tạo mới ' . self::TITLE . ' thành công');
             return redirect()->route(self::URL_HOME);
         }
 
-        $titleBreadCrumb = \AppClass::pageTitleAndBreadCrumb(self::TITLE, self::URL_HOME,1);
+        $titleBreadCrumb = \AppClass::pageTitleAndBreadCrumb(self::TITLE, self::URL_HOME, 1);
 
         return view(self::VIEW . '.add', [
             'page_title' => $titleBreadCrumb['page_title'],
@@ -61,6 +64,8 @@ class InvestorController extends Controller
             $req = $request->request->all();
             $req['name_ascii'] = $this->convert_vi_to_en($req['name']);
 //            dump($req);die;
+            $this->dataNormalization(Investor::SCHEMAS(), $req);
+
             $this->repository->update($req, $id);
             $request->session()->flash('success', 'cập nhật ' . self::TITLE . ' thành công');
             return redirect()->route(self::URL_HOME);

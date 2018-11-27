@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\City;
 use App\Repositories\CategoryRepository;
 use Carbon\Carbon;
@@ -34,6 +35,8 @@ class CategoryController extends Controller
         if ($request->isMethod("POST")) {
             $req = $request->request->all();
             $req['name_ascii'] = $this->convert_vi_to_en($req['name']);
+            $this->dataNormalization(Category::SCHEMAS(),$req);
+
             $this->repository->create($req);
             $request->session()->flash('success', 'Tạo mới ' . self::TITLE . ' thành công');
             return redirect()->route(self::URL_HOME);
@@ -60,6 +63,9 @@ class CategoryController extends Controller
         if ($request->isMethod('POST')) {
             $req = $request->request->all();
             $req['name_ascii'] = $this->convert_vi_to_en($req['name']);
+
+            $this->dataNormalization(Category::SCHEMAS(),$req);
+
             $this->repository->update($req, $id);
             $request->session()->flash('success', 'cập nhật ' . self::TITLE . ' thành công');
             return redirect()->route(self::URL_HOME);

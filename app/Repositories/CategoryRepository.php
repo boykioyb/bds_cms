@@ -3,37 +3,40 @@
 namespace App\Repositories;
 
 use App\Models\Category;
+use MongoDB\BSON\ObjectId;
 
 class CategoryRepository extends BaseRepository
 {
     const PAGE_DEFAULT = 0;
     const LIMIT_DEFAULT = 10;
 
-    public final function model(): string
+    public function model()
     {
         return Category::class;
     }
 
-    public final function findAll()
+    public function findAll()
     {
         $this->makeModel();
         return $this->model()::all();
     }
 
-    public final function findById(string $id)
+    public function findById(string $id)
     {
         $this->makeModel();
         return $this->model()::find($id);
     }
 
-    public final function create(array $data)
+    public function create(array $data)
     {
         $this->makeModel();
+        unset($data['_token']);
         return $this->model::create($data);
     }
 
-    public final function update(array $data,string $id,string $attribute = '_id',bool $withSoftDeletes = false)
+    public function update(array $data,string $id, string $attribute = '_id', bool $withSoftDeletes = false)
     {
+        unset($data['_token']);
         if ($withSoftDeletes) {
             $this->newQuery()->eagerLoadTrashed();
         }
@@ -44,14 +47,14 @@ class CategoryRepository extends BaseRepository
         return $this->model::find($id);
     }
 
-    public final function delete(string $id): array
+    public function delete(string $id)
     {
         $this->makeModel();
 
         return $this->model()->destroy($id);
     }
 
-    public final function where( array $conditions, string $operator = null,string $value = null)
+    public function where(array $conditions,string $operator = null,string $value = null)
     {
         $this->makeModel();
         $result = $this->model();
@@ -67,7 +70,7 @@ class CategoryRepository extends BaseRepository
         return $result;
     }
 
-    public final function count()
+    public function count()
     {
         $this->newQuery()
             ->loadWhere();
@@ -75,7 +78,7 @@ class CategoryRepository extends BaseRepository
         return $this->model->count();
     }
 
-    public final function paginate(array $option,string $operator = null, int $page = null,int $limit = null)
+    public function paginate(array $option, string $operator = null, int $page = null, int $limit = null)
     {
         if (empty($page)) {
             $page = self::PAGE_DEFAULT;
@@ -103,13 +106,18 @@ class CategoryRepository extends BaseRepository
         return $result->limit($limit)->offset($page)->get();
     }
 
-    private final function _dataNormalization(array $schema,array &$option):void
+    public function dataNormalization($schema, &$option)
     {
         foreach ($schema as $k => $val) {
             switch ($val['type']) {
                 case 'int';
-                    if (!empty($option[$k])) {
+                    if ($option[$k] != '') {
                         $option[$k] = (int)$option[$k];
+                    }
+                    break;
+                case "MongoDB\BSON\ObjectId";
+                    if (!empty($option[$k])) {
+                        $option[$k] = new ObjectId($option[$k]);
                     }
                     break;
             }

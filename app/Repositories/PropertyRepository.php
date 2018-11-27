@@ -3,11 +3,10 @@
 namespace App\Repositories;
 
 use App\Models\Property;
+use MongoDB\BSON\ObjectId;
 
 class PropertyRepository extends BaseRepository
 {
-    private $where;
-    private $orWhere;
     const PAGE_DEFAULT = 0;
     const LIMIT_DEFAULT = 10;
 
@@ -107,13 +106,18 @@ class PropertyRepository extends BaseRepository
         return $result->limit($limit)->offset($page)->get();
     }
 
-    private function _dataNormalization($schema, &$option)
+    public function dataNormalization($schema, &$option)
     {
         foreach ($schema as $k => $val) {
             switch ($val['type']) {
                 case 'int';
-                    if (!empty($option[$k])) {
+                    if ($option[$k] != '') {
                         $option[$k] = (int)$option[$k];
+                    }
+                    break;
+                case "MongoDB\BSON\ObjectId";
+                    if (!empty($option[$k])) {
+                        $option[$k] = new ObjectId($option[$k]);
                     }
                     break;
             }

@@ -91,8 +91,6 @@ class PropertyController extends Controller
             if (!empty($req['end_date'])) {
                 $req['end_date'] = $this->convertDateISO($req['end_date']);
             }
-
-            $req['avatar'] = json_decode($req['avatar']);
             $req['files'] = json_decode($req['files']);
             $req['name_ascii'] = $this->convert_vi_to_en($req['name']);
             if (!empty($req['price'])) {

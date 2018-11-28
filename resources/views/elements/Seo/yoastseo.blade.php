@@ -49,12 +49,12 @@
         <!--begin::Form-->
         <div class="m-portlet__body">
             <div class="form-group m-form__group row">
-                <div class="col-md-1" style="padding-left: 20px">
+                <div class="col-md-1" style="padding-left: 20px;margin-left: 14px;margin-top: 20px;">
                     <button class="btn btn-primary" id="refresh-analysis"><i class="fa fa-refresh"></i>
                         <span>Làm mới</span>
                     </button>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4" style="margin-top: 20px;">
                     <div id="overallScore" class="overallScore">
                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 500 500"
                              enable-background="new 0 0 500 500" xml:space="preserve" width="34" height="34">

@@ -41,6 +41,34 @@
 
     <!--end::Page Vendors Styles -->
     <link rel="shortcut icon" href="{{ asset('assets/demo/default/media/img/logo/favicon.ico') }}"/>
+
+    <script src="{{ asset('assets/vendors/base/vendors.bundle.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/demo/default/base/scripts.bundle.js') }}" type="text/javascript"></script>
+
+    <!--end::Global Theme Bundle -->
+
+    <!--begin::Page Vendors -->
+    <script src="{{ asset('assets/vendors/custom/fullcalendar/fullcalendar.bundle.js') }}"
+            type="text/javascript"></script>
+    <script src="{{ asset('tinymce/tinymce.min.js') }}"></script>
+    <!--end::Page Vendors -->
+    <!--begin::Page Scripts -->
+    {{--<script src="{{ asset('assets/app/js/dashboard.js') }}" type="text/javascript"></script>--}}
+    <script>
+        var $ = jQuery.noConflict();
+
+        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+
+        @if(\Illuminate\Support\Facades\Session::has($msg))
+        toastr.{{ $msg  }}('{{ \Illuminate\Support\Facades\Session::get($msg) }}');
+        @endif
+        @endforeach
+    </script>
+    @yield('script')
+    @yield('add-js')
+    <script src="{{ asset('js/global.js') }}"></script>
+    @yield('js')
+    @yield('js-file')
 </head>
 
 <!-- end::Head -->
@@ -134,48 +162,10 @@
 
 <!-- end::Quick Nav -->
 <!--begin::Global Theme Bundle -->
-<script src="{{ asset('assets/vendors/base/vendors.bundle.js') }}" type="text/javascript"></script>
-<script src="{{ asset('assets/demo/default/base/scripts.bundle.js') }}" type="text/javascript"></script>
 
-<!--end::Global Theme Bundle -->
-
-<!--begin::Page Vendors -->
-<script src="{{ asset('assets/vendors/custom/fullcalendar/fullcalendar.bundle.js') }}" type="text/javascript"></script>
-<script src="{{ asset('tinymce/tinymce.min.js') }}"></script>
-<!--end::Page Vendors -->
-<!--begin::Page Scripts -->
-{{--<script src="{{ asset('assets/app/js/dashboard.js') }}" type="text/javascript"></script>--}}
-<script>
-    var $= jQuery.noConflict();
-
-    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-
-    @if(\Illuminate\Support\Facades\Session::has($msg))
-    toastr.{{ $msg  }}('{{ \Illuminate\Support\Facades\Session::get($msg) }}');
-    @endif
-    @endforeach
-</script>
-@yield('script')
-@yield('add-js')
-<script src="{{ asset('js/global.js') }}"></script>
-@yield('js')
-<script src="{{ asset('js/jquery.min.js') }}"></script>
-<script src="{{ asset('js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('js/jquery-migrate-1.2.1.min.js') }}"></script>
-<script src="{{ asset('js/jquery.easing.js') }}"></script>
-<script src="{{ asset('js/jquery.prettyPhoto-3.1.4-W3C.js') }}"></script>
-<script src="{{ asset('js/jquery.ui.totop.js') }}"></script>
-<script src="{{ asset('js/jquery.inview.js') }}"></script>
-<script src="{{ asset('js/jquery.parallax-1.1.3.js') }}"></script>
-<script src="{{ asset('js/jquery.localscroll-1.2.7-min.js') }}"></script>
-<script src="{{ asset('js/jquery.scrollTo-1.4.2-min.js') }}"></script>
-<script src="{{ asset('js/jquery.fancybox-1.3.4.pack.js') }}"></script>
-<script src="{{ asset('js/jquery.fitvids.min.js') }}"></script>
-<script src="{{ asset('js/jquery.nicescroll.min.js') }}"></script>
 <script>
     base_url = '{{ getenv('BASE_URL') }}';
 </script>
-@yield('js-file')
 
 <!--end::Page Scripts -->
 </body>

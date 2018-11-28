@@ -3,7 +3,7 @@ $version = "9.13.2";
 
 // Cấu hình liên quan tới tương tác session với cms
 if (!defined("SESSION_NAME")) {
-    define("SESSION_NAME", 'DVH');
+    define("SESSION_NAME", 'BDS');
 }
 if (!defined("FILE_MANAGER_SECRET")) {
     define("FILE_MANAGER_SECRET", 'aa12DZW#$a!@');
@@ -106,7 +106,7 @@ $config = array(
 	| DO NOT put inside upload folder
 	|
 	*/
-	'thumbs_base_path' => '../thumbs/',
+	'thumbs_base_path' => '../../thumbs/',
 
 
 	/*
@@ -117,7 +117,7 @@ $config = array(
 	| If you want to be forced to assign the extension starting from the mime type
 	|
 	*/
-	'mime_extension_rename'	=> false,
+	'mime_extension_rename'	=> true,
 
 
 	/*
@@ -285,9 +285,9 @@ $config = array(
 	// If you set $image_resizing to TRUE the script converts all uploaded images exactly to image_resizing_width x image_resizing_height dimension
 	// If you set width or height to 0 the script automatically calculates the other dimension
 	// Is possible that if you upload very big images the script not work to overcome this increase the php configuration of memory and time limit
-	'image_resizing'                          => false,
-	'image_resizing_width'                    => 0,
-	'image_resizing_height'                   => 0,
+	'image_resizing'                          => true,
+	'image_resizing_width'                    => 350,
+	'image_resizing_height'                   => 260,
 	'image_resizing_mode'                     => 'auto', // same as $image_max_mode
 	'image_resizing_override'                 => false,
 	// If set to TRUE then you can specify bigger images than $image_max_width & height otherwise if image_resizing is

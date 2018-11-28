@@ -1,6 +1,3 @@
-<div class="form-group  m-form__group row">
-    <h2>Dành cho Seo</h2>
-</div>
 <div class="form-group m-form__group row">
     <label class="col-lg-2 col-form-label">Meta Tilte:</label>
     <div class="col-lg-8">

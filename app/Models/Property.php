@@ -40,7 +40,7 @@ class Property extends BaseModel
             'start_date' => ['type' => 'date', 'default' => null],
             'end_date' => ['type' => 'date', 'default' => null],
             'owner' => ['type' => 'string', 'default' => null],
-            'avatar' => ['type' => 'array(string)', 'default' => null],
+            'avatar' => ['type' => 'string', 'default' => null],
             'files' => ['type' => 'array(string)', 'default' => null],
         ];
     }

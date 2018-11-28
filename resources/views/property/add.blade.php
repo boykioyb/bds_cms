@@ -1,6 +1,9 @@
 @extends('layouts.base')
 @section('title',$page_title)
 @section('sub_header',$page_title)
+@section('js-file')
+    @include('elements.file_manager_assets')
+@endsection
 @section('content')
     <style>
         .m-portlet .m-portlet__body {
@@ -38,7 +41,7 @@
                             <div class="m-portlet__body">
                                 <div class="form-group m-form__group row">
                                     <label class="col-lg-2 col-form-label">Ngôn ngữ:</label>
-                                    <div class="col-lg-8">
+                                    <div class="col-lg-3">
                                         <select id="locale" name="lang_code" class="form-control m-input">
                                             @foreach(LANGUAGE as $k => $val)
                                                 <option
@@ -46,14 +49,12 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                </div>
-                                <div class="form-group m-form__group row">
                                     <label class="col-lg-2 col-form-label">Trạng thái:</label>
-                                    <div class="col-lg-8">
+                                    <div class="col-lg-3">
                                         <select name="status" id="status" class="form-control">
                                             @foreach(STATUS as $key => $val)
                                                 <option
-                                                    {{ $data->status != '' && $data->status == $key ? 'selected' : '' }} value="{{ $key }}">{{$val}}</option>
+                                                    {{ !empty($data->status) && $data->status == $key ? 'selected' : '' }} value="{{ $key }}">{{$val}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -76,7 +77,7 @@
                                 </div>
                                 <div class="form-group m-form__group row">
                                     <label class="col-lg-2 col-form-label">Danh mục:</label>
-                                    <div class="col-lg-8">
+                                    <div class="col-lg-3">
                                         <select name="categories" id="categories" class="form-control">
                                             <option value="">--- Chọn danh mục ---</option>
                                             @foreach($categories as $key => $val)
@@ -86,10 +87,8 @@
                                         </select>
                                     </div>
 
-                                </div>
-                                <div class="form-group m-form__group row">
                                     <label class="col-lg-2 col-form-label">Dự án:</label>
-                                    <div class="col-lg-8">
+                                    <div class="col-lg-3">
                                         <select name="project_sales" id="project_sales" class="form-control">
                                             <option value="">--- Chọn dự án ---</option>
                                             @foreach($project_sale as $key => $val)
@@ -146,41 +145,48 @@
                                 <div class="form-group m-form__group row">
                                     <label class="col-lg-2 col-form-label">Mô tả:</label>
                                     <div class="col-lg-8">
-                                        <textarea id="SeoDesc" class="tinymce" placeholder="nhập mô tả"
+                                        <textarea id="SeoDesc" class="tinymce" placeholder="nhập mô tả" rows="10"
                                                   name="description">{{ isset($data->description) && !empty($data->description) ? $data->description : '' }}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group m-form__group row">
                                     <label class="col-lg-2 col-form-label">Phòng ngủ:</label>
-                                    <div class="col-lg-1">
+                                    <div class="col-lg-3">
                                         <select name="beds" id="" class="form-control">
+                                            <option value="0">--- Chọn phòng ngủ ---</option>
                                             @foreach(NUMBERS as $k => $val)
                                                 <option
                                                     {{ !empty($data->beds) && $data->beds == $k ? 'selected' : '' }} value="{{ $k }}">{{$val}}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <label class="col-lg-1 col-form-label">Phòng tắm:</label>
-                                    <div class="col-lg-1">
+                                    <label class="col-lg-2 col-form-label">Phòng tắm:</label>
+                                    <div class="col-lg-3">
                                         <select name="baths" id="" class="form-control">
+                                            <option value="0">--- Chọn phòng tắm ---</option>
                                             @foreach(NUMBERS as $k => $val)
                                                 <option
                                                     {{ !empty($data->baths) && $data->baths == $k ? 'selected' : '' }} value="{{ $k }}">{{$val}}</option>
                                             @endforeach
                                         </select>
                                     </div>
+                                </div>
+                                <div class="form-group m-form__group row">
                                     <label class="col-lg-2 col-form-label">Gara ô tô:</label>
-                                    <div class="col-lg-1">
+                                    <div class="col-lg-3">
                                         <select name="garages" id="" class="form-control">
                                             @foreach(NUMBERS as $k => $val)
+                                                <option value="0">--- Chọn gara ---</option>
                                                 <option
                                                     {{ !empty($data->garages) && $data->garages == $k ? 'selected' : '' }} value="{{ $k }}">{{$val}}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <label class="col-lg-1 col-form-label">Phòng bếp:</label>
-                                    <div class="col-lg-1">
+                                    <label class="col-lg-2 col-form-label">Phòng bếp:</label>
+                                    <div class="col-lg-3">
                                         <select name="kitchen" id="" class="form-control">
+                                            <option value="0">--- Chọn Phòng bếp ---</option>
+
                                             @foreach(NUMBERS as $k => $val)
                                                 <option
                                                     {{ !empty($data->kitchen) && $data->kitchen == $k ? 'selected' : '' }} value="{{ $k }}">{{$val}}</option>
@@ -191,16 +197,17 @@
                                 </div>
                                 <div class="form-group m-form__group row">
                                     <label class="col-lg-2 col-form-label">Ban công:</label>
-                                    <div class="col-lg-1">
+                                    <div class="col-lg-3">
                                         <select name="balcony" id="" class="form-control">
+                                            <option value="0">--- Chọn ban công ---</option>
                                             @foreach(NUMBERS as $k => $val)
                                                 <option
                                                     {{ !empty($data->balcony) && $data->balcony == $k ? 'selected' : '' }} value="{{ $k }}">{{$val}}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <label class="col-lg-1 col-form-label">Diện tích:</label>
-                                    <div class="col-lg-2">
+                                    <label class="col-lg-2 col-form-label">Diện tích:</label>
+                                    <div class="col-lg-3">
                                         <div class="m-input-icon m-input-icon--right">
                                             <input type="number" min="0" name="acreage" class="form-control"
                                                    value="{{ isset($data->acreage) && !empty($data->acreage) ? $data->acreage : '' }}"

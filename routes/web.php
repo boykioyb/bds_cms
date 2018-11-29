@@ -65,3 +65,7 @@ Route::group(['prefix' => 'cities'], function () {
     Route::get('dataTables','CityController@dataTable')->name('cities.dataTable');
     Route::get('generate','CityController@generate')->name('cities.generate');
 });
+
+Route::get('test',function (){
+    return view('test');
+});

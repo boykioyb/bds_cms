@@ -74,3 +74,11 @@ Route::group(['prefix' => 'categories'], function () {
     Route::post('edit/{id}','CategoryController@edit')->name('categories.edit.post');
     Route::get('dataTables','CategoryController@dataTable')->name('categories.dataTable');
 });
+
+Route::get('test',function (){
+   return view('test');
+});
+
+Route::get('test2',function (){
+   return view('test2');
+});

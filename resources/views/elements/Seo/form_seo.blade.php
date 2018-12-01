@@ -1,6 +1,3 @@
-<div class="form-group  m-form__group row">
-    <h2>Dành cho Seo</h2>
-</div>
 <div class="form-group m-form__group row">
     <label class="col-lg-2 col-form-label">Meta Tilte:</label>
     <div class="col-lg-8">
@@ -20,9 +17,9 @@
 <div class="form-group m-form__group row">
     <label class="col-lg-2 col-form-label">Meta Keywords:</label>
     <div class="col-lg-8">
-        <input id="keywords" type="text" class="form-control m-input" name="meta_keyword"
+        <input id="keywords" type="text" class="form-control m-input" name="meta_keywords"
                placeholder="Nhập từ khóa"
-               value="{{ isset($data->meta_keyword) && !empty($data->meta_keyword) ? $data->meta_keyword : '' }}">
+               value="{{ isset($data->meta_keywords) && !empty($data->meta_keywords) ? $data->meta_keywords : '' }}">
         <span
             class="m-form__help">Cách nhau bởi dấu , (VD: a,b).</span>
     </div>

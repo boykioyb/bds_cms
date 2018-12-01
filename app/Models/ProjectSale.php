@@ -13,7 +13,7 @@ class ProjectSale extends BaseModel
     public static function SCHEMAS()
     {
         return [
-            'investor' => ['type' => ObjectId::class, 'default' => new ObjectId()],
+            'investor' =>  ['type' => 'string', 'default' => null],
             'lang_code' => ['type' => 'string', 'default' => null],
             'name' => ['type' => 'string', 'default' => null],
             'name_ascii' => ['type' => 'string', 'default' => null],

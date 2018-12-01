@@ -1,6 +1,9 @@
 @extends('layouts.base')
 @section('title',$page_title)
 @section('sub_header',$page_title)
+@section('js-file')
+    @include('elements.file_manager_assets')
+@endsection
 @section('content')
     <style>
         .m-portlet .m-portlet__body {
@@ -38,7 +41,7 @@
                             <div class="m-portlet__body">
                                 <div class="form-group m-form__group row">
                                     <label class="col-lg-2 col-form-label">Ngôn ngữ:</label>
-                                    <div class="col-lg-8">
+                                    <div class="col-lg-3">
                                         <select id="locale" name="lang_code" class="form-control m-input">
                                             @foreach(LANGUAGE as $k => $val)
                                                 <option
@@ -46,14 +49,12 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                </div>
-                                <div class="form-group m-form__group row">
                                     <label class="col-lg-2 col-form-label">Trạng thái:</label>
-                                    <div class="col-lg-8">
+                                    <div class="col-lg-3">
                                         <select name="status" id="status" class="form-control">
                                             @foreach(STATUS as $key => $val)
                                                 <option
-                                                    {{ !empty($data->status) && $data->status == $k ? 'selected' : '' }} value="{{ $key }}">{{$val}}</option>
+                                                    {{ !empty($data->status) && $data->status == $key ? 'selected' : '' }} value="{{ $key }}">{{$val}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -64,7 +65,7 @@
                                         <select name="priority" id="priority" class="form-control">
                                             @foreach(PRIORITY as $key => $val)
                                                 <option
-                                                    {{ !empty($data->priority) && $data->priority == $k ? 'selected' : '' }} value="{{ $key }}">{{$val}}</option>
+                                                    {{ !empty($data->priority) && $data->priority == $key ? 'selected' : '' }} value="{{ $key }}">{{$val}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -75,8 +76,19 @@
                                     </div>
                                 </div>
                                 <div class="form-group m-form__group row">
+                                    <label class="col-lg-2 col-form-label">Danh mục:</label>
+                                    <div class="col-lg-3">
+                                        <select name="categories" id="categories" class="form-control">
+                                            <option value="">--- Chọn danh mục ---</option>
+                                            @foreach($categories as $key => $val)
+                                                <option
+                                                    {{ !empty($data->categories) && $data->categories == $val->_id ? 'selected' : '' }} value="{{ $val->_id }}">{{ $val->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
                                     <label class="col-lg-2 col-form-label">Dự án:</label>
-                                    <div class="col-lg-8">
+                                    <div class="col-lg-3">
                                         <select name="project_sales" id="project_sales" class="form-control">
                                             <option value="">--- Chọn dự án ---</option>
                                             @foreach($project_sale as $key => $val)
@@ -133,40 +145,51 @@
                                 <div class="form-group m-form__group row">
                                     <label class="col-lg-2 col-form-label">Mô tả:</label>
                                     <div class="col-lg-8">
-                                        <textarea id="SeoDesc" class="tinymce" placeholder="nhập mô tả"
+                                        <textarea id="SeoDesc" class="tinymce" placeholder="nhập mô tả" rows="10"
                                                   name="description">{{ isset($data->description) && !empty($data->description) ? $data->description : '' }}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group m-form__group row">
                                     <label class="col-lg-2 col-form-label">Phòng ngủ:</label>
-                                    <div class="col-lg-1">
+                                    <div class="col-lg-3">
                                         <select name="beds" id="" class="form-control">
+                                            <option value="0">--- Chọn phòng ngủ ---</option>
                                             @foreach(NUMBERS as $k => $val)
-                                                <option value="{{ $k }}">{{$val}}</option>
+                                                <option
+                                                    {{ !empty($data->beds) && $data->beds == $k ? 'selected' : '' }} value="{{ $k }}">{{$val}}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <label class="col-lg-1 col-form-label">Phòng tắm:</label>
-                                    <div class="col-lg-1">
+                                    <label class="col-lg-2 col-form-label">Phòng tắm:</label>
+                                    <div class="col-lg-3">
                                         <select name="baths" id="" class="form-control">
+                                            <option value="0">--- Chọn phòng tắm ---</option>
                                             @foreach(NUMBERS as $k => $val)
-                                                <option value="{{ $k }}">{{$val}}</option>
+                                                <option
+                                                    {{ !empty($data->baths) && $data->baths == $k ? 'selected' : '' }} value="{{ $k }}">{{$val}}</option>
                                             @endforeach
                                         </select>
                                     </div>
+                                </div>
+                                <div class="form-group m-form__group row">
                                     <label class="col-lg-2 col-form-label">Gara ô tô:</label>
-                                    <div class="col-lg-1">
+                                    <div class="col-lg-3">
                                         <select name="garages" id="" class="form-control">
                                             @foreach(NUMBERS as $k => $val)
-                                                <option value="{{ $k }}">{{$val}}</option>
+                                                <option value="0">--- Chọn gara ---</option>
+                                                <option
+                                                    {{ !empty($data->garages) && $data->garages == $k ? 'selected' : '' }} value="{{ $k }}">{{$val}}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <label class="col-lg-1 col-form-label">Phòng bếp:</label>
-                                    <div class="col-lg-1">
+                                    <label class="col-lg-2 col-form-label">Phòng bếp:</label>
+                                    <div class="col-lg-3">
                                         <select name="kitchen" id="" class="form-control">
+                                            <option value="0">--- Chọn Phòng bếp ---</option>
+
                                             @foreach(NUMBERS as $k => $val)
-                                                <option value="{{ $k }}">{{$val}}</option>
+                                                <option
+                                                    {{ !empty($data->kitchen) && $data->kitchen == $k ? 'selected' : '' }} value="{{ $k }}">{{$val}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -174,17 +197,21 @@
                                 </div>
                                 <div class="form-group m-form__group row">
                                     <label class="col-lg-2 col-form-label">Ban công:</label>
-                                    <div class="col-lg-1">
+                                    <div class="col-lg-3">
                                         <select name="balcony" id="" class="form-control">
+                                            <option value="0">--- Chọn ban công ---</option>
                                             @foreach(NUMBERS as $k => $val)
-                                                <option value="{{ $k }}">{{$val}}</option>
+                                                <option
+                                                    {{ !empty($data->balcony) && $data->balcony == $k ? 'selected' : '' }} value="{{ $k }}">{{$val}}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <label class="col-lg-1 col-form-label">Diện tích:</label>
-                                    <div class="col-lg-2">
+                                    <label class="col-lg-2 col-form-label">Diện tích:</label>
+                                    <div class="col-lg-3">
                                         <div class="m-input-icon m-input-icon--right">
-                                            <input type="number" min="0" name="acreage" class="form-control">
+                                            <input type="number" min="0" name="acreage" class="form-control"
+                                                   value="{{ isset($data->acreage) && !empty($data->acreage) ? $data->acreage : '' }}"
+                                            >
                                             <span
                                                 class="m-input-icon__icon m-input-icon__icon--right"><span><i>m<sup>2</sup></i></span></span>
                                         </div>
@@ -193,11 +220,29 @@
                                 <div class="form-group m-form__group row">
                                     <label class="col-lg-2 col-form-label">Giá:</label>
                                     <div class="col-lg-3">
-                                        <input type="text" class="form-control" name="price">
+                                        <div class="m-input-icon m-input-icon--right">
+                                            <input type="text" class="form-control" name="price"
+                                                   onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                                                   onkeyup="this.value=FormatNumber(this.value);"
+                                                   value="{{ isset($data->price) && !empty($data->price) ? number_format($data->price, 0, ',', ',') : '' }}"
+                                            >
+                                            <span
+                                                class="m-input-icon__icon m-input-icon__icon--right"><span><i
+                                                        class="fa fa-money-bill-wave"></i></span></span>
+                                        </div>
                                     </div>
                                     <label class="col-lg-2 col-form-label">Giá Sale:</label>
                                     <div class="col-lg-3">
-                                        <input type="text" class="form-control" name="price_sale">
+                                        <div class="m-input-icon m-input-icon--right">
+                                            <input type="text" class="form-control" name="price_sale"
+                                                   onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                                                   onkeyup="this.value=FormatNumber(this.value);"
+                                                   value="{{ isset($data->price_sale) && !empty($data->price_sale) ? number_format($data->price_sale, 0, ',', ',') : '' }}"
+                                            >
+                                            <span
+                                                class="m-input-icon__icon m-input-icon__icon--right"><span><i
+                                                        class="fa fa-money-bill-wave"></i></span></span>
+                                        </div>
                                     </div>
 
                                 </div>
@@ -208,7 +253,8 @@
                                             <input type="text" name="start_date" class="form-control m-input datepicker"
                                                    readonly=""
                                                    placeholder="Select date" id=""
-                                                   value="">
+                                                   value="{{ isset($data->start_date) && !empty($data->start_date) ? \AppClass::formatDate($data->start_date) : '' }}"
+                                            >
                                             <div class="input-group-append">
 													<span class="input-group-text">
 														<i class="la la-calendar-check-o"></i>
@@ -222,7 +268,8 @@
                                             <input type="text" name="end_date" class="form-control m-input datepicker"
                                                    readonly=""
                                                    placeholder="Select date" id=""
-                                                   value="">
+                                                   value="{{ isset($data->end_date) && !empty($data->end_date) ? \AppClass::formatDate($data->end_date)  : '' }}"
+                                            >
                                             <div class="input-group-append">
 													<span class="input-group-text">
 														<i class="la la-calendar-check-o"></i>
@@ -232,11 +279,23 @@
                                     </div>
 
                                 </div>
+
                                 @include('elements.file_manager',[
-                                                  'id' => 'image-id',
+                                                  'id' => 'avatar-id',
+                                                  'files' => !empty($data->avatar) ? $data->avatar : null,
+                                                  'name' => 'avatar',
+                                                  'label' => 'Chọn ảnh đại diện',
+                                                  'option' => array(
+                                                      'type' => 1,
+                                                      'relative_url' => 1,
+                                                  )
+                                              ])
+
+                                @include('elements.file_manager',[
+                                                  'id' => 'file-id',
                                                   'files' => !empty($data->files) ? $data->files : null,
                                                   'name' => 'files',
-                                                  'label' => 'Chọn ảnh',
+                                                  'label' => 'Chọn thư viện',
                                                   'option' => array(
                                                       'type' => 1,
                                                       'relative_url' => 1,

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProjectSale;
 use App\Repositories\CityRepository;
 use App\Repositories\InvestorRepository;
 use App\Repositories\ProjectSaleRepository;
@@ -41,6 +42,8 @@ class ProjectSaleController extends Controller
             $req = $request->request->all();
             $req['files'] = json_decode($req['files']);
             $req['name_ascii'] = $this->convert_vi_to_en($req['name']);
+            $this->dataNormalization(ProjectSale::SCHEMAS(), $req);
+
             $this->repository->create($req);
             $request->session()->flash('success', 'Tạo mới ' . self::TITLE . ' thành công');
             return redirect()->route(self::URL_HOME);
@@ -75,6 +78,8 @@ class ProjectSaleController extends Controller
             $req['investor'] = new ObjectId($req['investor']);
             $req['files'] = json_decode($req['files']);
             $req['name_ascii'] = $this->convert_vi_to_en($req['name']);
+            $this->dataNormalization(ProjectSale::SCHEMAS(), $req);
+
             $this->repository->update($req, $id);
             $request->session()->flash('success', 'cập nhật ' . self::TITLE . ' thành công');
             return redirect()->route(self::URL_HOME);
@@ -170,7 +175,7 @@ class ProjectSaleController extends Controller
             $name = $request->request->get('name');
             $find = $this->city->where(['name' => $name])->get();
             $district = array();
-            foreach ($find as $val){
+            foreach ($find as $val) {
                 $district = $val->district;
             }
             return new Response(json_encode($district));

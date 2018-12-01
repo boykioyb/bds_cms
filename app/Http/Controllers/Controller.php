@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use MongoDB\BSON\ObjectId;
+use MongoDB\BSON\UTCDateTime;
 
 class Controller extends BaseController
 {
@@ -47,10 +49,30 @@ class Controller extends BaseController
         }
         return $options;
     }
-    public function convertDateISO($date = null){
-        if ($date == null){
-            return Carbon::now();
+
+    public function convertDateISO(string $date = null)
+    {
+        $orig_date = new \DateTime(date('Y-m-d H:i:s', strtotime($date)));
+        $orig_date = $orig_date->getTimestamp();
+        $utcDateTime = new UTCDateTime($orig_date * 1000);
+        return $utcDateTime;
+    }
+
+    public function dataNormalization($schema, &$option)
+    {
+        foreach ($schema as $k => $val) {
+            switch ($val['type']) {
+                case 'int';
+                    if ($option[$k] != '') {
+                        $option[$k] = (int)$option[$k];
+                    }
+                    break;
+                case "MongoDB\BSON\ObjectId";
+                    if (!empty($option[$k])) {
+                        $option[$k] = new ObjectId($option[$k]);
+                    }
+                    break;
+            }
         }
-        return Carbon::createFromFormat('Y-d-m H:i:s.u',date('Y-m-d H:i:s.u',strtotime($date)));
     }
 }

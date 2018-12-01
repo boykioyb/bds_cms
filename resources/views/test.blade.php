@@ -1,21 +1,26 @@
 <!DOCTYPE html>
+
 <html>
 <head>
     <meta charset="utf-8">
-    <title>CKEditor</title>
-    <script src="https://cdn.ckeditor.com/ckeditor5/11.1.1/classic/ckeditor.js"></script>
+    <title>CKFinder 3 Samples</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--[if lt IE 9]>
+    <![endif]-->
 </head>
 <body>
-<textarea name="content" id="editor">This is some sample content.</textarea>
+<div id="ckfinder-widget"></div>
+
+<script src="{{ asset('js/ckfinder/ckfinder.js') }}"></script>
+<script>CKFinder.config( { connectorPath: '/ckfinder/connector' } );</script>
 <script>
-    ClassicEditor
-        .create( document.querySelector( '#editor' ) )
-        .then( editor => {
-            console.log( editor );
-        } )
-        .catch( error => {
-            console.error( error );
-        } );
+    CKFinder.widget( 'ckfinder-widget', {
+        width: '100%',
+        height: 700,
+        skin: 'moono'
+    } );
 </script>
+{{--<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js" type="text/javascript"></script>--}}
+
 </body>
 </html>

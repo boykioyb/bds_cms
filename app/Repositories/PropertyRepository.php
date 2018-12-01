@@ -3,11 +3,10 @@
 namespace App\Repositories;
 
 use App\Models\Property;
+use MongoDB\BSON\ObjectId;
 
 class PropertyRepository extends BaseRepository
 {
-    private $where;
-    private $orWhere;
     const PAGE_DEFAULT = 0;
     const LIMIT_DEFAULT = 10;
 
@@ -22,20 +21,22 @@ class PropertyRepository extends BaseRepository
         return $this->model()::all();
     }
 
-    public function findById($id)
+    public function findById(string $id)
     {
         $this->makeModel();
         return $this->model()::find($id);
     }
 
-    public function create($data)
+    public function create(array $data)
     {
         $this->makeModel();
+        unset($data['_token']);
         return $this->model::create($data);
     }
 
-    public function update($data = [], $id, $attribute = '_id', $withSoftDeletes = false)
+    public function update(array $data,string $id, string $attribute = '_id', bool $withSoftDeletes = false)
     {
+        unset($data['_token']);
         if ($withSoftDeletes) {
             $this->newQuery()->eagerLoadTrashed();
         }
@@ -46,14 +47,14 @@ class PropertyRepository extends BaseRepository
         return $this->model::find($id);
     }
 
-    public function delete($id)
+    public function delete(string $id)
     {
         $this->makeModel();
 
         return $this->model()->destroy($id);
     }
 
-    public function where($conditions, $operator = null, $value = null)
+    public function where(array $conditions,string $operator = null,string $value = null)
     {
         $this->makeModel();
         $result = $this->model();
@@ -69,17 +70,6 @@ class PropertyRepository extends BaseRepository
         return $result;
     }
 
-    public function orWhere($conditions, $operator = null, $value = null)
-    {
-        if (func_num_args() == 2) {
-            list($value, $operator) = [$operator, '='];
-        }
-
-        $this->orWhere[] = [$conditions, $operator, $value];
-
-        return $this;
-    }
-
     public function count()
     {
         $this->newQuery()
@@ -88,37 +78,7 @@ class PropertyRepository extends BaseRepository
         return $this->model->count();
     }
 
-    public function loadWhere()
-    {
-        if (count($this->where)) {
-            foreach ($this->where as $where) {
-                if (is_array($where[0])) {
-                    $this->model->where($where[0]);
-                } else {
-                    if (count($where) == 3) {
-                        $this->model->where($where[0], $where[1], $where[2]);
-                    } else {
-                        $this->model->where($where[0], '=', $where[1]);
-                    }
-                }
-            }
-        }
-        if (count($this->orWhere)) {
-            foreach ($this->orWhere as $orWhere) {
-                if (is_array($orWhere[0])) {
-                    $this->model->orWhere($orWhere[0]);
-                } else {
-                    if (count($orWhere) == 3) {
-                        $this->model->orWhere($orWhere[0], $orWhere[1], $orWhere[2]);
-                    } else {
-                        $this->model->orWhere($orWhere[0], '=', $orWhere[1]);
-                    }
-                }
-            }
-        }
-    }
-
-    public function paginate($option, $operator = null, $page = null, $limit = null)
+    public function paginate(array $option, string $operator = null, int $page = null, int $limit = null)
     {
         if (empty($page)) {
             $page = self::PAGE_DEFAULT;
@@ -146,13 +106,18 @@ class PropertyRepository extends BaseRepository
         return $result->limit($limit)->offset($page)->get();
     }
 
-    private function _dataNormalization($schema, &$option)
+    public function dataNormalization($schema, &$option)
     {
         foreach ($schema as $k => $val) {
             switch ($val['type']) {
                 case 'int';
-                    if (!empty($option[$k])) {
+                    if ($option[$k] != '') {
                         $option[$k] = (int)$option[$k];
+                    }
+                    break;
+                case "MongoDB\BSON\ObjectId";
+                    if (!empty($option[$k])) {
+                        $option[$k] = new ObjectId($option[$k]);
                     }
                     break;
             }
